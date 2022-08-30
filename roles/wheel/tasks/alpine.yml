@@ -1,0 +1,11 @@
+- name: install doas
+  apk:
+    name: doas
+
+- name: copy doas config
+  copy:
+    src: doas.conf
+    dest: /etc/doas.d/doas.conf
+    owner: root
+    group: root
+    mode: '0644'

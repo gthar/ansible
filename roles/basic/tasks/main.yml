@@ -2,23 +2,6 @@
   apk:
     name: python3
 
-- name: create 'wheel' group
-  group:
-    name: wheel
-    gid: 10
-
-- name: install doas
-  apk:
-    name: doas
-
-- name: copy doas config
-  copy:
-    src: doas.conf
-    dest: /etc/doas.d/doas.conf
-    owner: root
-    group: root
-    mode: '0644'
-
 - name: create group 'rilla'
   group:
     name: rilla

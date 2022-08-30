@@ -1,0 +1,8 @@
+- name: create 'wheel' group
+  group:
+    name: wheel
+    gid: 10
+
+- name: 'alpine-specific wheel things'
+  include_tasks: alpine.yml
+  when: ansible_distribution == "Alpine"
