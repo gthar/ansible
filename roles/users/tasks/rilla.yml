@@ -36,4 +36,4 @@
       - /home/rilla/.ssh/authorized_keys
     exclude:
       - /home/rilla/.ash_history
-  when: ansible_distribution == "Alpine"
+  when: ansible_distribution == "Alpine" and use_lbu

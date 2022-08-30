@@ -39,3 +39,4 @@
     exclude:
       - /var/lib/ansible/.ansible
       - /var/lib/ansible/.ash_history
+  when: ansible_distribution == "Alpine" and use_lbu

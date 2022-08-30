@@ -10,6 +10,7 @@
     users:
       - rilla
       - ansible
+    use_lbu: true
   post_tasks:
     - name: lbu commit
       lbu:
@@ -21,3 +22,5 @@
   become_method: doas
   roles:
     - basic
+  vars:
+    use_lbu: false

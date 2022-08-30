@@ -37,4 +37,4 @@
       - /var/lib/woodpecker/.ssh/authorized_keys
     exclude:
       - /var/lib/woodpecker/.ash_history
-  when: ansible_distribution == "Alpine"
+  when: ansible_distribution == "Alpine" and use_lbu
