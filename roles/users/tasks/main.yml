@@ -5,4 +5,4 @@
   include_tasks: ansible.yml
 
 - name: setup user 'woodpecker'
-  include_tasks: ansible.yml
+  include_tasks: woodpecker.yml
