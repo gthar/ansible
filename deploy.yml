@@ -1,0 +1,4 @@
+- name: snitch deployment
+  hosts: snitch
+  become: yes
+  become_method: doas
