@@ -17,6 +17,14 @@
       - rilla
       - wheel
 
+- name: commit ansible's home to lbu
+  lbu:
+    include:
+      - /home/rilla
+    exclude:
+      - /home/rilla/.ash_history
+  when: ansible_distribution == "Alpine"
+
 - name: create group 'ansible'
   group:
     name: ansible
@@ -47,4 +55,5 @@
       - /var/lib/ansible
     exclude:
       - /var/lib/ansible/.ansible
+      - /var/lib/ansible/.ash_history
   when: ansible_distribution == "Alpine"
