@@ -1,0 +1,6 @@
+#!/bin/sh
+
+ansible-playbook \
+    --inventory hosts.yml \
+    "$@" \
+    deploy.yml
