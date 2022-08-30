@@ -1,0 +1,33 @@
+- name: create group 'ansible'
+  group:
+    name: ansible
+    gid: 501
+
+- name: create user 'ansible'
+  user:
+    name: ansible
+    uid: 501
+    group: ansible
+    home: /var/lib/ansible
+    password: "*"  # disabled password but can be accessed with SSH
+    groups:
+      - ansible
+      - wheel
+
+- name: make sure ansible owns its home
+  file:
+    state: directory
+    path: /var/lib/ansible
+    owner: ansible
+    group: ansible
+    mode: '2755'
+
+- name: set ansible's authorized keys
+  authorized_key:
+    user: ansible
+    key: '{{ item }}'
+    path: /var/lib/ansible/.ssh/authorized_keys
+  with_file:
+    - public_keys/yubikey
+    - public_keys/ansible
+  register: ansible_keys

@@ -1,0 +1,16 @@
+- name: commit ansible's home to lbu
+  lbu:
+    include:
+      - /home/rilla
+      - /home/rilla/.ssh/authorized_keys
+    exclude:
+      - /home/rilla/.ash_history
+
+- name: commit ansible's home to lbu
+  lbu:
+    include:
+      - /var/lib/ansible
+      - /var/lib/ansible/.ssh/authorized_keys
+    exclude:
+      - /var/lib/ansible/.ansible
+      - /var/lib/ansible/.ash_history

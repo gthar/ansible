@@ -1,0 +1,9 @@
+- name: setup user 'rilla'
+  include_tasks: rilla.yml
+
+- name: setup user 'ansible'
+  include_tasks: ansible.yml
+
+- name: commit user's home to alpine lbu
+  include_tasks: alpine.yml
+  when: ansible_distribution == "Alpine"

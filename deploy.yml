@@ -4,6 +4,7 @@
   become_method: doas
   roles:
     - basic
+    - users
     - sshd
   post_tasks:
     - name: lbu commit

@@ -1,0 +1,31 @@
+- name: create group 'rilla'
+  group:
+    name: rilla
+    gid: 1000
+
+- name: create user 'rilla'
+  user:
+    name: rilla
+    uid: 1000
+    group: rilla
+    home: /home/rilla
+    groups:
+      - rilla
+      - wheel
+
+- name: make sure rilla owns its home
+  file:
+    state: directory
+    path: /home/rilla
+    owner: rilla
+    group: rilla
+    mode: '2755'
+
+- name: set rilla's authorized key
+  authorized_key:
+    user: rilla
+    key: '{{ item }}'
+    path: /home/rilla/.ssh/authorized_keys
+  with_file:
+    - public_keys/yubikey
+  register: rilla_keys
