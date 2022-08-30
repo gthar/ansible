@@ -12,6 +12,7 @@
     password: "*"  # disabled password but can be accessed with SSH
     groups:
       - deploy
+    append: yes
 
 - name: additional groups to woodpecker
   user:

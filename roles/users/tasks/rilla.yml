@@ -12,6 +12,7 @@
     groups:
       - deploy
       - wheel
+    append: yes
 
 - name: additional groups to rilla
   user:

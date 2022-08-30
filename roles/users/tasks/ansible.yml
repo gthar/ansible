@@ -12,6 +12,7 @@
     password: "*"  # disabled password but can be accessed with SSH
     groups:
       - wheel
+    append: yes
 
 - name: make sure ansible owns its home
   file:
