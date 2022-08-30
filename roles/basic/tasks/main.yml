@@ -16,3 +16,35 @@
     groups:
       - rilla
       - wheel
+
+- name: create group 'ansible'
+  group:
+    name: ansible
+    gid: 501
+
+- name: create user 'ansible'
+  user:
+    name: ansible
+    uid: 501
+    group: ansible
+    home: /var/lib/ansible
+    password: "*"  # disabled password but can be accessed with SSH
+    groups:
+      - ansible
+      - wheel
+
+- name: make sure ansible owns its home
+  file:
+    state: directory
+    path: /var/lib/ansible
+    owner: ansible
+    group: ansible
+    mode: '2755'
+
+- name: commit ansible's home to lbu
+  lbu:
+    include:
+      - /var/lib/ansible
+    exclude:
+      - /var/lib/ansible/.ansible
+  when: ansible_distribution == "Alpine"

@@ -5,7 +5,17 @@
     path: /home/rilla/.ssh/authorized_keys
   with_file:
     - public_keys/yubikey
-  register: ssh_keys
+  register: rilla_keys
+
+- name: set ansible's authorized keys
+  authorized_key:
+    user: ansible
+    key: '{{ item }}'
+    path: /var/lib/ansible/.ssh/authorized_keys
+  with_file:
+    - public_keys/yubikey
+    - public_keys/ansible
+  register: ansible_keys
 
 - name: set sshd config
   template:
