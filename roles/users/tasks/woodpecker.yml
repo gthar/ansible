@@ -1,0 +1,32 @@
+- name: create group 'woodpecker'
+  group:
+    name: woodpecker
+    gid: 502
+
+- name: create user 'woodpecker'
+  user:
+    name: woodpecker
+    uid: 501
+    group: woodpecker
+    home: /var/lib/woodpecker
+    password: "*"  # disabled password but can be accessed with SSH
+    groups:
+      - woodpecker
+
+- name: make sure woodpecker owns its home
+  file:
+    state: directory
+    path: /var/lib/woodpecker
+    owner: woodpecker
+    group: woodpecker
+    mode: '2755'
+
+- name: set woodpecker's authorized keys
+  authorized_key:
+    user: woodpecker
+    key: '{{ item }}'
+    path: /var/lib/woodpecker/.ssh/authorized_keys
+  with_file:
+    - public_keys/yubikey
+    - public_keys/woodpecker
+  register: woodpecker_keys

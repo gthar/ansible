@@ -4,6 +4,9 @@
 - name: setup user 'ansible'
   include_tasks: ansible.yml
 
+- name: setup user 'woodpecker'
+  include_tasks: ansible.yml
+
 - name: commit user's home to alpine lbu
   include_tasks: alpine.yml
   when: ansible_distribution == "Alpine"

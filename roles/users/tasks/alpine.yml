@@ -14,3 +14,11 @@
     exclude:
       - /var/lib/ansible/.ansible
       - /var/lib/ansible/.ash_history
+
+- name: commit woodpecker's home to lbu
+  lbu:
+    include:
+      - /var/lib/woodpecker
+      - /var/lib/woodpecker/.ssh/authorized_keys
+    exclude:
+      - /var/lib/woodpecker/.ash_history
