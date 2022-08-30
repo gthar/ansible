@@ -1,0 +1,52 @@
+- name: install python3
+  apk:
+    name: python3
+
+- name: create 'wheel' group
+  group:
+    name: wheel
+    gid: 10
+
+- name: install doas
+  apk:
+    name: doas
+
+- name: copy doas config
+  copy:
+    src: doas.conf
+    dest: /etc/doas.d/doas.conf
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: create group 'rilla'
+  group:
+    name: rilla
+    gid: 1000
+
+- name: create user 'rilla'
+  user:
+    name: rilla
+    uid: 1000
+    group: rilla
+    home: /home/rilla
+    groups:
+      - rilla
+      - wheel
+
+- name: set rilla's authorized key
+  authorized_key:
+    user: rilla
+    key: '{{ item }}'
+    path: /home/rilla/.ssh/authorized_keys
+  with_file:
+    - public_keys/yubikey
+
+- name: commit ssh public keys with lbu
+  lbu:
+    include:
+      - /home/rilla/.ssh/authorized_keys
+
+- name: lbu commit
+  lbu:
+    commit: true

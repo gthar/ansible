@@ -2,3 +2,5 @@
   hosts: snitch
   become: yes
   become_method: doas
+  roles:
+    - basic
