@@ -16,18 +16,3 @@
     groups:
       - rilla
       - wheel
-
-- name: set rilla's authorized key
-  authorized_key:
-    user: rilla
-    key: '{{ item }}'
-    path: /home/rilla/.ssh/authorized_keys
-  with_file:
-    - public_keys/yubikey
-  register: ssh_keys
-
-- name: commit ssh public keys with lbu
-  lbu:
-    include:
-      - /home/rilla/.ssh/authorized_keys
-  when: ansible_distribution == "Alpine" and ssh_keys.changed

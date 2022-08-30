@@ -1,0 +1,15 @@
+- name: commit ssh public keys with lbu
+  lbu:
+    include:
+      - /home/rilla/.ssh/authorized_keys
+  when: ssh_keys.changed
+
+- name: install openssh
+  apk:
+    name: openssh
+
+- name: enable sshd service
+  service:
+    name: sshd
+    enabled: yes
+    state: started
