@@ -6,6 +6,10 @@
     - basic
     - users
     - sshd
+  vars:
+    users:
+      - rilla
+      - ansible
   post_tasks:
     - name: lbu commit
       lbu:

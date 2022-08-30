@@ -1,8 +1,5 @@
-- name: setup user 'rilla'
-  include_tasks: rilla.yml
-
-- name: setup user 'ansible'
-  include_tasks: ansible.yml
-
-- name: setup user 'woodpecker'
-  include_tasks: woodpecker.yml
+- name: create users
+  include_tasks: "{{ username }}.yml"
+  loop: "{{ users }}"
+  loop_control:
+    loop_var: username
