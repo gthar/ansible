@@ -29,4 +29,12 @@
   with_file:
     - public_keys/yubikey
     - public_keys/woodpecker
-  register: woodpecker_keys
+
+- name: commit woodpecker's home to lbu
+  lbu:
+    include:
+      - /var/lib/woodpecker
+      - /var/lib/woodpecker/.ssh/authorized_keys
+    exclude:
+      - /var/lib/woodpecker/.ash_history
+  when: ansible_distribution == "Alpine"

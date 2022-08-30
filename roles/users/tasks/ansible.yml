@@ -30,4 +30,12 @@
   with_file:
     - public_keys/yubikey
     - public_keys/ansible
-  register: ansible_keys
+
+- name: commit ansible's home to lbu
+  lbu:
+    include:
+      - /var/lib/ansible
+      - /var/lib/ansible/.ssh/authorized_keys
+    exclude:
+      - /var/lib/ansible/.ansible
+      - /var/lib/ansible/.ash_history

@@ -28,4 +28,12 @@
     path: /home/rilla/.ssh/authorized_keys
   with_file:
     - public_keys/yubikey
-  register: rilla_keys
+
+- name: commit rilla's home to lbu
+  lbu:
+    include:
+      - /home/rilla
+      - /home/rilla/.ssh/authorized_keys
+    exclude:
+      - /home/rilla/.ash_history
+  when: ansible_distribution == "Alpine"
