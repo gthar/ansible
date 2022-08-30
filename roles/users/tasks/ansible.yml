@@ -11,7 +11,6 @@
     home: /var/lib/ansible
     password: "*"  # disabled password but can be accessed with SSH
     groups:
-      - ansible
       - wheel
 
 - name: make sure ansible owns its home

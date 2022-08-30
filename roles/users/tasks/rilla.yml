@@ -10,8 +10,17 @@
     group: rilla
     home: /home/rilla
     groups:
-      - rilla
+      - deploy
       - wheel
+
+- name: additional groups to rilla
+  user:
+    name: rilla
+    groups: "{{item}}"
+    append: yes
+  when: item in ansible_facts.getent_group
+  with_items:
+    - docker
 
 - name: make sure rilla owns its home
   file:

@@ -1,3 +1,12 @@
+- name: create group 'deploy'
+  group:
+    name: deploy
+    gid: 700
+
+- name: determine available groups
+  getent:
+    database: group
+
 - name: create users
   include_tasks: "{{ username }}.yml"
   loop: "{{ users }}"

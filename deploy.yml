@@ -22,5 +22,10 @@
   become_method: doas
   roles:
     - basic
+    - users
   vars:
+    users:
+      - rilla
+      - ansible
+      - woodpecker
     use_lbu: false
