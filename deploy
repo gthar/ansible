@@ -2,5 +2,6 @@
 
 ansible-playbook \
     --inventory hosts.yml \
+    --vault-password-file get_password.sh \
     "$@" \
     deploy.yml
