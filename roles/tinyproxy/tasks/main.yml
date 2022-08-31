@@ -1,0 +1,39 @@
+# note: test with
+#  * curl icanhazip.com
+#  * http_proxy=caladan:8888 curl icanhazip.com
+
+- name: install tinyproxy
+  apk:
+    name: tinyproxy
+  when: ansible_distribution == "Alpine"
+
+- name: copy tinyproxy config
+  copy:
+    src: tinyproxy.conf
+    dest: /etc/tinyproxy/tinyproxy.conf
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: enable tinyproxy
+  service:
+    name: tinyproxy
+    state: started
+    enabled: yes
+  when: ansible_distribution == "Alpine"
+
+- name: set awall firewall rule
+  copy:
+    src: awall/tinyproxy.json
+    dest: /etc/awall/optional/tinyproxy.json
+    owner: root
+    group: root
+    mode: '0644'
+  when: ansible_distribution == "Alpine"
+
+- name: enable tinyproxy awall rule
+  awall:
+    name: tinyproxy
+    state: enabled
+    activate: yes
+  when: ansible_distribution == "Alpine"

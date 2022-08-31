@@ -1,0 +1,12 @@
+{
+  "description": "allow tinyproxy from WG",
+  "service": {"tinyproxy": {"proto": "tcp", "port": 8888}},
+  "filter": [
+    {
+      "in": "WG",
+      "out": "_fw",
+      "service": ["tinyproxy"],
+      "action": "accept"
+    }
+  ]
+}

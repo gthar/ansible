@@ -25,6 +25,7 @@
     - basic
     - users
     - sshd
+    - tinyproxy
   vars:
     users:
       - rilla
