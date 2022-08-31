@@ -1,0 +1,50 @@
+- name: install wpa-supplicant (alpine)
+  apk:
+    name: wpa_supplicant
+  when: ansible_distribution == "Alpine"
+
+- name: create wpa_supplicant.conf
+  shell:
+    cmd: |
+      wpa_passphrase "{{ wifi_ssid }}" "{{ wifi_psk }}" \
+      > /etc/wpa_supplicant/wpa_supplicant.conf
+    creates: /etc/wpa_supplicant/wpa_supplicant.conf
+
+- name: add wifi interface
+  blockinfile:
+    path: /etc/network/interfaces
+    block: |
+      auto wlan0
+      iface wlan0 inet dhcp
+
+- name: enable wpa_supplicant at boot
+  service:
+    name: wpa_supplicant
+    state: started
+    enabled: yes
+    runlevel: boot
+  when: ansible_distribution == "Alpine"
+
+- name: enable networking at boot
+  service:
+    name: networking
+    state: started
+    enabled: yes
+    runlevel: boot
+  when: ansible_distribution == "Alpine"
+
+- name: add config block to enable reconnection when wifi signal is lost
+  blockinfile:
+    path: /etc/wpa_supplicant/wpa_supplicant.conf
+    block: |
+      ap_scan=1
+      autoscan=periodic:10
+      disable_scan_offload=1
+
+- name: enable wpa_cli at boot
+  service:
+    name: wpa_cli
+    state: started
+    enabled: yes
+    runlevel: boot
+  when: ansible_distribution == "Alpine"
