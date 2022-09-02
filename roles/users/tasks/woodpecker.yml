@@ -31,20 +31,10 @@
     group: woodpecker
     mode: '2755'
 
-- name: set woodpecker's authorized keys
-  authorized_key:
-    user: woodpecker
-    key: '{{ item }}'
-    path: /var/lib/woodpecker/.ssh/authorized_keys
-  with_file:
-    - public_keys/yubikey
-    - public_keys/woodpecker
-
 - name: commit woodpecker's home to lbu
   lbu:
     include:
       - /var/lib/woodpecker
-      - /var/lib/woodpecker/.ssh/authorized_keys
     exclude:
       - /var/lib/woodpecker/.ash_history
   when: ansible_distribution == "Alpine" and use_lbu

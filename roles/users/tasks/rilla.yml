@@ -31,19 +31,10 @@
     group: rilla
     mode: '2755'
 
-- name: set rilla's authorized key
-  authorized_key:
-    user: rilla
-    key: '{{ item }}'
-    path: /home/rilla/.ssh/authorized_keys
-  with_file:
-    - public_keys/yubikey
-
 - name: commit rilla's home to lbu
   lbu:
     include:
       - /home/rilla
-      - /home/rilla/.ssh/authorized_keys
     exclude:
       - /home/rilla/.ash_history
   when: ansible_distribution == "Alpine" and use_lbu
