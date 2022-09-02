@@ -6,6 +6,9 @@
     owner: root
     group: wheel
 
+- name: setup host ssh certificates
+  include_tasks: certs.yml
+
 - name: setup alpine ssh
   include_tasks: alpine.yml
   when: ansible_distribution == "Alpine"

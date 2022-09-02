@@ -1,0 +1,23 @@
+- name: ssh_host_rsa_key-cert.pub
+  copy:
+    src: "host_files/{{ ansible_hostname }}/ssh_host_rsa_key-cert.pub"
+    dest: "/etc/ssh/ssh_host_rsa_key-cert.pub"
+    mode: '0644'
+    owner: root
+    group: root
+
+- name: ssh_host_rsa_key.pub
+  copy:
+    src: "host_files/{{ ansible_hostname }}/ssh_host_rsa_key.pub"
+    dest: "/etc/ssh/ssh_host_rsa_key.pub"
+    mode: '0644'
+    owner: root
+    group: root
+
+- name: ssh_host_rsa_key
+  copy:
+    src: "host_files/{{ ansible_hostname }}/ssh_host_rsa_key"
+    dest: "/etc/ssh/ssh_host_rsa_key"
+    mode: '0600'
+    owner: root
+    group: root
