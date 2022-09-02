@@ -21,3 +21,11 @@
     mode: '0600'
     owner: root
     group: root
+
+- name: copy user_ca.pub
+  copy:
+    src: user_ca.pub
+    dest: "/etc/ssh/user_ca.pub"
+    mode: '0644'
+    owner: root
+    group: root
