@@ -32,3 +32,16 @@
       - ansible
       - woodpecker
     use_lbu: false
+
+- name: narwhal deployment
+  hosts: narwhal
+  become: yes
+  become_method: sudo
+  roles:
+    - basic
+  vars:
+    users:
+      - rilla
+      - ansible
+      - woodpecker
+    use_lbu: false
