@@ -39,6 +39,7 @@
   become_method: sudo
   roles:
     - basic
+    - users
   vars:
     users:
       - rilla
