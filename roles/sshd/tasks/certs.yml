@@ -29,3 +29,11 @@
     mode: '0644'
     owner: root
     group: root
+
+- name: copy ssh_known_hosts
+  copy:
+    src: ssh_known_hosts
+    dest: "/etc/ssh/ssh_known_hosts"
+    mode: '0644'
+    owner: root
+    group: root
