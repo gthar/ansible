@@ -1,4 +1,6 @@
 ---
+# doas already comes with OpenBSD
+
 - name: copy doas config
   copy:
     src: doas.conf
