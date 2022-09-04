@@ -1,12 +1,24 @@
 ---
+
+- name: create 'wheel' group
+  group:
+    name: wheel
+    gid: 0
+  when: ansible_distribution == "OpenBSD"
+
 - name: create 'wheel' group
   group:
     name: wheel
     gid: 10
+  when: ansible_distribution != "OpenBSD"
 
 - name: 'alpine-specific wheel things'
   include_tasks: alpine.yml
   when: ansible_distribution == "Alpine"
+
+- name: 'OpenBSD-specific wheel things'
+  include_tasks: openbsd.yml
+  when: ansible_distribution == "OpenBSD"
 
 - name: setup with sudo
   include_tasks: sudo.yml
