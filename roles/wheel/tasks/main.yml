@@ -6,3 +6,7 @@
 - name: 'alpine-specific wheel things'
   include_tasks: alpine.yml
   when: ansible_distribution == "Alpine"
+
+- name: setup with sudo
+  include_tasks: sudo.yml
+  when: ansible_distribution in ["Debian", "Ubuntu"]

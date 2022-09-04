@@ -1,0 +1,11 @@
+- name: install sudo
+  apt:
+    name: sudo
+  when: ansible_distribution in ["Debian", "Ubuntu"]
+
+- name: allow wheel sudo without password
+  community.general.sudoers:
+    commands: ALL
+    group: wheel
+    name: wheel
+    nopassword: true
