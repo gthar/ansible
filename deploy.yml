@@ -41,6 +41,7 @@
   roles:
     - basic
     - users
+    - sshd
   vars:
     users:
       - rilla
