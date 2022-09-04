@@ -1,0 +1,45 @@
+---
+- name: quality of life packages
+  apk:
+    name:
+      - htop
+      - mksh  # I want something somewhat nicer thant busybox ash
+      - mosh
+      - neovim
+      - ripgrep
+      - tmux
+  when: ansible_distribution == "Alpine"
+
+- name: install python3
+  apt:
+    name:
+      - htop
+      - mosh
+      - neovim
+      - ripgrep
+      - tmux
+  when: ansible_distribution in ["Debian", "Ubuntu"]
+
+- name: install python3
+  openbsd_pkg:
+    name:
+      - htop
+      - mosh
+      - neovim
+      - ripgrep
+      # OpenBSD already ships with tmux
+  when: ansible_distribution == "OpenBSD"
+
+- name: make tmux config directory
+  file:
+    path: /home/rilla/.config/tmux
+    state: directory
+    owner: rilla
+    group: rilla
+
+- name: copy tmux config
+  copy:
+    src: tmux.conf
+    dest: /home/rilla/.config/tmux/tmux.conf
+    owner: rilla
+    group: rilla

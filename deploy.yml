@@ -26,6 +26,7 @@
     - basic
     - users
     - sshd
+    - quality_of_life
     - tinyproxy
   vars:
     users:
@@ -42,6 +43,7 @@
     - basic
     - users
     - sshd
+    - quality_of_life
   vars:
     users:
       - rilla
@@ -56,6 +58,7 @@
     - basic
     - users
     - sshd
+    - quality_of_life
   vars:
     users:
       - rilla
