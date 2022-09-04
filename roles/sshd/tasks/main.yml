@@ -1,3 +1,4 @@
+---
 - name: set sshd config
   template:
     src: sshd_config.j2

@@ -1,3 +1,4 @@
+---
 - name: install sudo
   apt:
     name: sudo

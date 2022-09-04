@@ -1,3 +1,4 @@
+---
 - name: install openssh
   apk:
     name: openssh
@@ -5,5 +6,5 @@
 - name: enable sshd service
   service:
     name: sshd
-    enabled: yes
+    enabled: true
     state: started

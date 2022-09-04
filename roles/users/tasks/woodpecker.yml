@@ -1,3 +1,4 @@
+---
 - name: create group 'woodpecker'
   group:
     name: woodpecker
@@ -12,13 +13,13 @@
     password: "*"  # disabled password but can be accessed with SSH
     groups:
       - deploy
-    append: yes
+    append: true
 
 - name: additional groups to woodpecker
   user:
     name: woodpecker
     groups: "{{item}}"
-    append: yes
+    append: true
   when: item in ansible_facts.getent_group
   with_items:
     - docker

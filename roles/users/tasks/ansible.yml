@@ -1,3 +1,4 @@
+---
 - name: create group 'ansible'
   group:
     name: ansible
@@ -12,7 +13,7 @@
     password: "*"  # disabled password but can be accessed with SSH
     groups:
       - wheel
-    append: yes
+    append: true
 
 - name: make sure ansible owns its home
   file:

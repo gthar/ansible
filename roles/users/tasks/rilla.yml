@@ -1,3 +1,4 @@
+---
 - name: create group 'rilla'
   group:
     name: rilla
@@ -12,13 +13,13 @@
     groups:
       - deploy
       - wheel
-    append: yes
+    append: true
 
 - name: additional groups to rilla
   user:
     name: rilla
     groups: "{{item}}"
-    append: yes
+    append: true
   when: item in ansible_facts.getent_group
   with_items:
     - docker

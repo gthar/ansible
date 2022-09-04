@@ -2,6 +2,7 @@
 #  * curl icanhazip.com
 #  * http_proxy=caladan:8888 curl icanhazip.com
 
+---
 - name: install tinyproxy
   apk:
     name: tinyproxy
@@ -19,7 +20,7 @@
   service:
     name: tinyproxy
     state: started
-    enabled: yes
+    enabled: true
   when: ansible_distribution == "Alpine"
 
 - name: set awall firewall rule
@@ -35,5 +36,5 @@
   awall:
     name: tinyproxy
     state: enabled
-    activate: yes
+    activate: true
   when: ansible_distribution == "Alpine"

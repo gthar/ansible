@@ -1,3 +1,4 @@
+---
 - name: install wpa-supplicant (alpine)
   apk:
     name: wpa_supplicant
@@ -21,7 +22,7 @@
   service:
     name: wpa_supplicant
     state: started
-    enabled: yes
+    enabled: true
     runlevel: boot
   when: ansible_distribution == "Alpine"
 
@@ -29,7 +30,7 @@
   service:
     name: networking
     state: started
-    enabled: yes
+    enabled: true
     runlevel: boot
   when: ansible_distribution == "Alpine"
 
@@ -45,6 +46,6 @@
   service:
     name: wpa_cli
     state: started
-    enabled: yes
+    enabled: true
     runlevel: boot
   when: ansible_distribution == "Alpine"
