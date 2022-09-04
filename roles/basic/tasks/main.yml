@@ -8,3 +8,8 @@
   apt:
     name: python3
   when: ansible_distribution in ["Debian", "Ubuntu"]
+
+- name: install python3
+  openbsd_pkg:
+    name: python3
+  when: ansible_distribution == "OpenBSD"
