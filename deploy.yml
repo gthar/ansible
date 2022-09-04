@@ -47,4 +47,14 @@
       - rilla
       - ansible
       - woodpecker
-    use_lbu: false
+
+- name: fugu deployment
+  hosts: fugu
+  become: true
+  become_method: doas
+  roles:
+    - basic
+  vars:
+    users:
+      - rilla
+      - ansible
