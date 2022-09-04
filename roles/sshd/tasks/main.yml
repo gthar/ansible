@@ -5,7 +5,6 @@
     dest: /etc/ssh/sshd_config
     mode: '0644'
     owner: root
-    group: wheel
 
 - name: setup host ssh certificates
   include_tasks: certs.yml

@@ -5,7 +5,6 @@
     dest: "/etc/ssh/ssh_host_ed25519_key-cert.pub"
     mode: '0644'
     owner: root
-    group: root
 
 - name: ssh_host_ed25519_key.pub
   copy:
@@ -13,7 +12,6 @@
     dest: "/etc/ssh/ssh_host_ed25519_key.pub"
     mode: '0644'
     owner: root
-    group: root
 
 - name: ssh_host_ed25519_key
   copy:
@@ -21,7 +19,6 @@
     dest: "/etc/ssh/ssh_host_ed25519_key"
     mode: '0600'
     owner: root
-    group: root
 
 - name: copy user_ca.pub
   copy:
@@ -29,7 +26,6 @@
     dest: "/etc/ssh/user_ca.pub"
     mode: '0644'
     owner: root
-    group: root
 
 - name: copy ssh_known_hosts
   copy:
@@ -37,4 +33,3 @@
     dest: "/etc/ssh/ssh_known_hosts"
     mode: '0644'
     owner: root
-    group: root
