@@ -120,5 +120,6 @@ Subsystem	sftp	/usr/lib/ssh/sftp-server
 #	PermitTTY no
 #	ForceCommand cvs server
 
-HostCertificate /etc/ssh/ssh_host_rsa_key-cert.pub
+HostKey /etc/ssh/ssh_host_ed25519_key
+HostCertificate /etc/ssh/ssh_host_ed25519_key-cert.pub
 TrustedUserCAKeys /etc/ssh/user_ca.pub
