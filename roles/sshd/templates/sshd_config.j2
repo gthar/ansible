@@ -108,9 +108,14 @@ X11Forwarding no
 
 # override default of no subsystems
 {% if ansible_distribution == "OpenBSD" %}
-Subsystem       sftp    /usr/libexec/sftp-server
+Subsystem  sftp  /usr/libexec/sftp-server
+{% elif ansible_distribution == "Alpine" %}
+Subsystem  sftp  /usr/lib/ssh/sftp-server
+{% elif ansible_distribution == "Ubuntu" %}
+Subsystem  sftp  /usr/lib/openssh/sftp-server
 {% else %}
-Subsystem	sftp	/usr/lib/ssh/sftp-server
+# I don't know what OS that is, Ansible guessed on using the same config as Alpine
+Subsystem  sftp  /usr/lib/ssh/sftp-server
 {% endif %}
 
 # Example of overriding settings on a per-user basis
