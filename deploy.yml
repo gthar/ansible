@@ -54,6 +54,7 @@
   become_method: doas
   roles:
     - basic
+    - users
   vars:
     users:
       - rilla
