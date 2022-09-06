@@ -1,0 +1,2 @@
+wg_persistent_keepalive: 25
+wg_listen_port: 51820
