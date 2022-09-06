@@ -7,15 +7,11 @@
     - users
     - sshd
     - wifi
+    - lbu_commit
   vars:
     users:
       - rilla
       - ansible
-    use_lbu: true
-  post_tasks:
-    - name: lbu commit
-      lbu:
-        commit: true
 
 - name: caladan deployment
   hosts: caladan
@@ -31,7 +27,6 @@
       - rilla
       - ansible
       - woodpecker
-    use_lbu: false
 
 - name: narwhal deployment
   hosts: narwhal
