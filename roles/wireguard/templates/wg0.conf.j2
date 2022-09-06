@@ -13,8 +13,8 @@ AllowedIPs = {{ peer_data.allowed_ips }}
 PersistentKeepalive = {{ wg_persistent_keepalive }}
 PresharedKey = {{
   wg_preshared_keys.get(
-    inventory_hostname + "-" + peer_hostname,
-    wg_preshared_keys.get(peer_hostname + "-" + inventory_hostname)
+    inventory_hostname + "_" + peer_hostname,
+    wg_preshared_keys.get(peer_hostname + "_" + inventory_hostname)
   )
 }}
 
