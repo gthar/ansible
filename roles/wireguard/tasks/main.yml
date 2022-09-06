@@ -1,0 +1,7 @@
+---
+- name: set wg0.conf config file
+  template:
+    src: wg0.conf.j2
+    dest: /etc/wireguard/wg0.conf
+    mode: "0600"
+    owner: root

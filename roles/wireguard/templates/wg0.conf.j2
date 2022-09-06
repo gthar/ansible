@@ -1,0 +1,22 @@
+[Interface]
+PrivateKey = {{ wg.peers.get(inventory_hostname).private_key }}
+ListenPort = {{ wg.listen_port }}
+Address = {{ wg.peers.get(inventory_hostname).address }}
+DNS = {{ wg.dns }}
+
+{%  for peer_hostname, peer_data in wg.peers.items() %}
+{% if peer_hostname != inventory_hostname %}
+[Peer]  # {{ peer_hostname }}
+PublicKey = {{ peer_data.public_key }}
+Endpoint = {{ peer_data.endpoint }}:{{ wg.listen_port }}
+AllowedIPs = {{ peer_data.allowed_ips }}
+PersistentKeepalive = {{ wg.persistent_keepalive }}
+PresharedKey = {{
+  wg.preshared_keys.get(
+    inventory_hostname + "-" + peer_hostname,
+    wg.preshared_keys.get(peer_hostname + "-" + inventory_hostname)
+  )
+}}
+
+{% endif %}
+{% endfor %}
