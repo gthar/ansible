@@ -1,21 +1,21 @@
 ---
 - name: ssh_host_ed25519_key-cert.pub
   copy:
-    src: "host_files/{{ ansible_hostname }}/ssh_host_ed25519_key-cert.pub"
+    src: "host_files/ssh/{{ ansible_hostname }}/ssh_host_ed25519_key-cert.pub"
     dest: "/etc/ssh/ssh_host_ed25519_key-cert.pub"
     mode: '0644'
     owner: root
 
 - name: ssh_host_ed25519_key.pub
   copy:
-    src: "host_files/{{ ansible_hostname }}/ssh_host_ed25519_key.pub"
+    src: "host_files/ssh/{{ ansible_hostname }}/ssh_host_ed25519_key.pub"
     dest: "/etc/ssh/ssh_host_ed25519_key.pub"
     mode: '0644'
     owner: root
 
 - name: ssh_host_ed25519_key
   copy:
-    src: "host_files/{{ ansible_hostname }}/ssh_host_ed25519_key"
+    src: "host_files/ssh/{{ ansible_hostname }}/ssh_host_ed25519_key"
     dest: "/etc/ssh/ssh_host_ed25519_key"
     mode: '0600'
     owner: root
