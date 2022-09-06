@@ -2,7 +2,6 @@
 - name: snitch deployment
   hosts: snitch
   become: true
-  become_method: doas
   roles:
     - basic
     - users
@@ -21,7 +20,6 @@
 - name: caladan deployment
   hosts: caladan
   become: true
-  become_method: doas
   roles:
     - basic
     - users
@@ -38,7 +36,6 @@
 - name: narwhal deployment
   hosts: narwhal
   become: true
-  become_method: sudo
   roles:
     - basic
     - users
@@ -53,7 +50,6 @@
 - name: fugu deployment
   hosts: fugu
   become: true
-  become_method: doas
   roles:
     - basic
     - users
