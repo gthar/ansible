@@ -1,26 +1,41 @@
 ---
-- name: snitch deployment
-  hosts: snitch
+
+- name: common roles
+  hosts:
+    - caladan
+    - narwhal
+    - fugu
+    - snitch
   become: true
   roles:
     - basic
     - users
     - sshd
-    - wifi
-    - lbu_commit
   vars:
     users:
       - rilla
       - ansible
+      - woodpecker
 
-- name: caladan deployment
+- name: quality of life tools
+  hosts:
+    - caladan
+    - narwhal
+    - fugu
+  become: true
+  roles:
+    - quality_of_life
+
+- name: wifi setup
+  hosts: snitch
+  become: true
+  roles:
+    - wifi
+
+- name: caladan-specific things
   hosts: caladan
   become: true
   roles:
-    - basic
-    - users
-    - sshd
-    - quality_of_life
     - tinyproxy
   vars:
     users:
@@ -28,29 +43,8 @@
       - ansible
       - woodpecker
 
-- name: narwhal deployment
-  hosts: narwhal
+- name: lbu commit
+  hosts: snitch
   become: true
   roles:
-    - basic
-    - users
-    - sshd
-    - quality_of_life
-  vars:
-    users:
-      - rilla
-      - ansible
-      - woodpecker
-
-- name: fugu deployment
-  hosts: fugu
-  become: true
-  roles:
-    - basic
-    - users
-    - sshd
-    - quality_of_life
-  vars:
-    users:
-      - rilla
-      - ansible
+    - lbu_commit
