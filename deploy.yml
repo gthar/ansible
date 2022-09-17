@@ -15,6 +15,7 @@
     users:
       - rilla
       - ansible
+      - gopass
       - woodpecker
 
 - name: quality of life tools
@@ -45,10 +46,19 @@
   become: true
   roles:
     - wireguard
-  tags: wg
 
 - name: lbu commit
   hosts: snitch
   become: true
   roles:
     - lbu_commit
+
+- name: setup gopass
+  become: true
+  hosts:
+    - caladan
+    - fugu
+    - narwhal
+  roles:
+    - gopass
+  tags: gopass

@@ -1,0 +1,29 @@
+---
+- name: create group 'gopass'
+  group:
+    name: gopass
+    gid: 503
+
+- name: create user 'gopass'
+  user:
+    name: gopass
+    uid: 503
+    group: gopass
+    home: /var/lib/gopass
+    password: "!"
+
+- name: make sure gopass owns its home
+  file:
+    state: directory
+    path: /var/lib/gopass
+    owner: gopass
+    group: gopass
+    mode: '2755'
+
+- name: commit gopass's home to lbu
+  lbu:
+    include:
+      - /var/lib/gopass
+    exclude:
+      - /var/lib/gopass/.ash_history
+  when: ansible_distribution == "Alpine" and use_lbu
