@@ -16,4 +16,5 @@
   apt:
     name:
       - gopass
+      - gopass-archive-keyring
     state: present
