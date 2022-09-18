@@ -1,14 +1,4 @@
 ---
-- name: install gopass
-  apk:
-    name: gopass
-  when: ansible_distribution == "Alpine"
 
 - name: install gopass
-  include_tasks: debian.yml
-  when: ansible_distribution in ["Debian", "Ubuntu"]
-
-- name: install gopass
-  openbsd_pkg:
-    name: gopass
-  when: ansible_distribution == "OpenBSD"
+  include_tasks: install.yml

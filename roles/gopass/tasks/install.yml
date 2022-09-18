@@ -1,0 +1,31 @@
+---
+
+- name: install gopass (Alpine)
+  apk:
+    name: gopass
+  when: ansible_distribution == "Alpine"
+
+- name: install gopass (Debian)
+  block:
+    - name: add gopass apt key
+      get_url:
+        url: https://packages.gopass.pw/repos/gopass/gopass-archive-keyring.gpg
+        dest: /etc/apt/trusted.gpg.d/gopass-archive-keyring.gpg
+    - name: add gopass repo
+      apt_repository:
+        repo: deb https://packages.gopass.pw/repos/gopass stable main
+        filename: gopass.list
+        update_cache: true
+        state: present
+    - name: install gopass
+      apt:
+        name:
+          - gopass
+          - gopass-archive-keyring
+        state: present
+  when: ansible_distribution in ["Debian", "Ubuntu"]
+
+- name: install gopass (OpenBSD)
+  openbsd_pkg:
+    name: gopass
+  when: ansible_distribution == "OpenBSD"
