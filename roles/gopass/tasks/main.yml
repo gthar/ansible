@@ -2,3 +2,9 @@
 
 - name: install gopass
   include_tasks: install.yml
+
+- name: copy ssh keys
+  include_tasks: ssh_keys.yml
+
+- name: gitconfig
+  include_tasks: gitconfig.yml

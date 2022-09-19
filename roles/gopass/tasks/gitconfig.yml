@@ -1,0 +1,8 @@
+---
+
+- name: setup gopass gitconfig
+  template:
+    src: gitconfig.j2
+    dest: /var/lib/gopass/.gitconfig
+    mode: "0644"
+    owner: gopass
