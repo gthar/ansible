@@ -1,0 +1,8 @@
+---
+
+- name: configure usercfg.txt
+  lineinfile:
+    path: /media/mmcblk0p1/usercfg.txt
+    line: "{{ item }}"
+    state: present
+  loop: "{{ rpi_cfg }}"

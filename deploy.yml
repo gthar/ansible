@@ -28,6 +28,14 @@
   roles:
     - mounts
 
+- name: usercfg
+  hosts:
+    - suricata
+  become: true
+  roles:
+    - usercfg
+  tags: test
+
 - name: pi_fan_hwpwm
   hosts:
     - suricata
