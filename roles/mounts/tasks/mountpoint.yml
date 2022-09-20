@@ -1,0 +1,15 @@
+---
+
+- name: create mountpoint directory
+  file:
+    path: "{{ item.path }}"
+    state: directory
+
+- name: create mountpoint
+  mount:
+    path: "{{ item.path }}"
+    src: "{{ item.src }}"
+    fstype: "{{ item.fstype }}"
+    opts: "{{ item.opts }}"
+    passno: "{{ item.passno }}"
+    state: mounted

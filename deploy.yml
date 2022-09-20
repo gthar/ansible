@@ -3,26 +3,45 @@
 - name: common roles
   hosts:
     - caladan
-    - narwhal
     - fugu
+    - narwhal
     - snitch
+    - suricata
   become: true
   roles:
     - basic
     - users
+    - repos
     - sshd
   vars:
     users:
       - rilla
       - ansible
+      - builder
       - gopass
       - woodpecker
+
+- name: mounts
+  hosts:
+    - suricata
+  become: true
+  roles:
+    - mounts
+
+- name: pi_fan_hwpwm
+  hosts:
+    - suricata
+  become: true
+  roles:
+    - pi_fan_hwpwm
+  tags: fan
 
 - name: quality of life tools
   hosts:
     - caladan
-    - narwhal
     - fugu
+    - narwhal
+    - suricata
   become: true
   roles:
     - quality_of_life
@@ -47,12 +66,6 @@
   roles:
     - wireguard
 
-- name: lbu commit
-  hosts: snitch
-  become: true
-  roles:
-    - lbu_commit
-
 - name: setup gopass
   become: true
   hosts:
@@ -62,3 +75,12 @@
   roles:
     - gopass
   tags: gopass
+
+- name: lbu commit
+  hosts:
+    - snitch
+    - suricata
+  become: true
+  roles:
+    - lbu_commit
+

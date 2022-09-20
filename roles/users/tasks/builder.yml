@@ -1,0 +1,37 @@
+---
+- name: create group 'builder'
+  group:
+    name: builder
+    gid: 504
+
+- name: create user 'builder'
+  user:
+    name: builder
+    uid: 504
+    group: builder
+    home: /var/lib/builder
+    password: "!"
+
+- name: make sure builder owns its home
+  file:
+    state: directory
+    path: /var/lib/builder
+    owner: builder
+    group: builder
+    mode: '2755'
+
+- name: let builder own the src directory
+  file:
+    state: directory
+    path: /var/lib/builder/src
+    owner: builder
+    group: builder
+
+- name: commit builder's home to lbu
+  lbu:
+    include:
+      - /var/lib/builder
+    exclude:
+      - /var/lib/builder/.ash_history
+      - /var/lib/builder/src
+  when: ansible_distribution == "Alpine" and use_lbu

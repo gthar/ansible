@@ -1,0 +1,9 @@
+#http://dl-cdn.alpinelinux.org/alpine/v3.16/main
+#http://dl-cdn.alpinelinux.org/alpine/v3.16/community
+#http://dl-cdn.alpinelinux.org/alpine/edge/main
+#http://dl-cdn.alpinelinux.org/alpine/edge/community
+#http://dl-cdn.alpinelinux.org/alpine/edge/testing
+
+{% for repo in alpine_repos %}
+http://dl-cdn.alpinelinux.org/alpine/{{ alpine_version }}/{{ repo }}
+{% endfor %}

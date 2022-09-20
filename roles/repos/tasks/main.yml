@@ -1,0 +1,16 @@
+---
+
+- name: setup apk repos
+  block:
+
+    - name: render /etc/apk/repositories
+      template:
+        src: apk/repositories.j2
+        dest: /etc/apk/repositories
+        mode: '0644'
+
+    - name: apk update
+      apk:
+        update_cache: true
+
+  when: ansible_distribution == "Alpine"

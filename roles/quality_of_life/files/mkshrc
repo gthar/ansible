@@ -1,0 +1,9 @@
+#PS1="$(echo -e "\033[36m$PWD\033[00m") ❯ "
+#PS1=$PWD ❯
+bind '^L=clear-screen'
+bind -m ^U='^[0^K'
+# PS1="${USER}@${HOSTNAME}:\${PWD/} ❯ "
+PS1=$'\n\e[34m${USER}@${HOSTNAME}\e[36m:\${PWD/}\e[00m\n❯ '
+
+alias vi=nvim
+alias vim=nvim

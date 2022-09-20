@@ -30,16 +30,65 @@
       # OpenBSD already ships with tmux
   when: ansible_distribution == "OpenBSD"
 
-- name: make tmux config directory
-  file:
-    path: /home/rilla/.config/tmux
-    state: directory
-    owner: rilla
-    group: rilla
+- name: set up tmux
+  block:
 
-- name: copy tmux config
-  copy:
-    src: tmux.conf
-    dest: /home/rilla/.config/tmux/tmux.conf
-    owner: rilla
-    group: rilla
+    - name: make tmux config directory
+      file:
+        path: /home/rilla/.config/tmux
+        state: directory
+        owner: rilla
+        group: rilla
+
+    - name: copy tmux config
+      copy:
+        src: tmux.conf
+        dest: /home/rilla/.config/tmux/tmux.conf
+        owner: rilla
+        group: rilla
+
+    - name: make sure .profile file exists
+      file:
+        name: /home/rilla/.profile
+        state: touch
+        owner: rilla
+        group: rilla
+        modification_time: preserve
+        access_time: preserve
+        mode: '0644'
+
+    - name: start tmux session on ssh connection
+      lineinfile:
+        path: /home/rilla/.profile
+        line: '[ -n "$PS1" ] && [ -z "$TMUX"  ] && [ -n "$SSH_CONNECTION" ] && exec tmux -u'
+        insertafter: EOF
+        state: present
+
+- name: set Alpine shell to mksh
+  block:
+
+    - name: install mksh
+      apk:
+        name: mksh
+
+    - name: change user default shell
+      user:
+        name: rilla
+        shell: /bin/mksh
+
+    - name: copy mkshrc
+      copy:
+        src: mkshrc
+        dest: /home/rilla/.mkshrc
+        owner: rilla
+        group: rilla
+
+  when: ansible_distribution == "Alpine"
+
+- name: include to lbu config files
+  lbu:
+    include:
+      - /home/rilla/.config/tmux/tmux.conf
+      - /home/rilla/.mkshrc
+      - /home/rilla/.profile
+  when: ansible_distribution == "Alpine" and use_lbu

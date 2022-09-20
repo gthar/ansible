@@ -1,0 +1,20 @@
+---
+
+- name: build pi_fan_hwpwm
+  make:
+    chdir: /var/lib/builder/src/pibox-os/pwm-fan
+    target: all
+  become_user: builder
+
+- name: make sure /usr/local/sbin exists
+  file:
+    state: directory
+    path: /usr/local/sbin
+
+- name: install pi_fan_hwpwm
+  copy:
+    src: /var/lib/builder/src/pibox-os/pwm-fan/pi_fan_hwpwm
+    dest: /usr/local/sbin/pi_fan_hwpwm
+    remote_src: true
+    owner: root
+    mode: '0755'

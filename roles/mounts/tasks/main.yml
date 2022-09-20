@@ -1,0 +1,5 @@
+---
+
+- name: setup mountpoints
+  include_tasks: mountpoint.yml
+  loop: "{{ mounts }}"

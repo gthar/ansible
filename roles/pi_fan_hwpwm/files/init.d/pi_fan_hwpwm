@@ -1,0 +1,12 @@
+#!/sbin/openrc-run
+
+name="pi_fan_hwpwm"
+description="Hardware PWM control for Raspberry Pi 4 Case Fan"
+supervisor="supervise-daemon"
+command="/usr/local/sbin/pi_fan_hwpwm"
+supervise_daemon_args=" -d /run"
+command_user="root"
+
+depend() {
+    after syslog
+}

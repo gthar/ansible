@@ -1,0 +1,12 @@
+install
+- git
+- make
+- gcc
+- musl-dev
+
+config
+- iomem relaxed
+
+steps
+- build and compile
+- setup openrc service
