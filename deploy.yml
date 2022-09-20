@@ -34,7 +34,6 @@
   become: true
   roles:
     - pi_fan_hwpwm
-  tags: fan
 
 - name: quality of life tools
   hosts:
@@ -83,4 +82,3 @@
   become: true
   roles:
     - lbu_commit
-

@@ -91,4 +91,7 @@
       - /home/rilla/.config/tmux/tmux.conf
       - /home/rilla/.mkshrc
       - /home/rilla/.profile
+    exclude:
+      - /home/rilla/.local/share/nvim
+      - /home/rilla/.cache
   when: ansible_distribution == "Alpine" and use_lbu
