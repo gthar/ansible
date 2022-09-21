@@ -11,3 +11,9 @@
 
 - name: import gpg keys
   include_tasks: gnupg.yml
+
+- name: clone password store
+  git:
+    repo: git@git.narwhal.monotremata.xyz:lan/password-store.git
+    dest: /var/lib/gopass/.password-store
+  become_user: gopass
