@@ -1,0 +1,53 @@
+---
+
+- name: create temporary import directory
+  become_user: gopass
+  tempfile:
+    prefix: "gpg-import"
+    state: directory
+  register: gpg_import_directory
+
+- name: copy host-specific keys
+  copy:
+    src: "host_files/gopass/gnupg/{{ ansible_hostname }}/private.asc"
+    dest: "{{ gpg_import_directory.path }}/private.asc"
+    owner: gopass
+    mode: "0600"
+
+- name: copy common files
+  copy:
+    src: "gpg/{{ item }}"
+    dest: "{{ gpg_import_directory.path }}/{{ item }}"
+    owner: gopass
+    mode: "0600"
+  loop:
+    - ownertrust.txt
+    - yubikey.asc
+    - narwhal.asc
+    - caladan.asc
+    - fugu.asc
+
+- name: make sure the gpg config exists
+  become_user: gopass
+  command: "gpg --list-keys"
+  args:
+    creates: /var/lib/gopass/.gnupg
+
+- name: import keys
+  become_user: gopass
+  command: "gpg --import {{ gpg_import_directory.path }}/{{ item }}"
+  loop:
+    - private.asc
+    - yubikey.asc
+    - narwhal.asc
+    - caladan.asc
+    - fugu.asc
+
+- name: add trust
+  become_user: gopass
+  command: "gpg --import-ownertrust {{ gpg_import_directory.path }}/ownertrust.txt"
+
+- name: remove the temporary directory
+  file:
+    path: "{{ gpg_import_directory.path }}"
+    state: absent

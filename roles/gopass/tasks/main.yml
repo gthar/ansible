@@ -8,3 +8,6 @@
 
 - name: gitconfig
   include_tasks: gitconfig.yml
+
+- name: import gpg keys
+  include_tasks: gnupg.yml
