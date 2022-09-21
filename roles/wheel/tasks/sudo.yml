@@ -5,8 +5,8 @@
   when: ansible_distribution in ["Debian", "Ubuntu"]
 
 - name: allow wheel sudo without password
-  community.general.sudoers:
-    commands: ALL
-    group: wheel
-    name: wheel
-    nopassword: true
+  copy:
+    dest: /etc/sudoers.d/wheel
+    content: "%wheel ALL=(ALL) NOPASSWD: ALL"
+    mode: '0440'
+    owner: root
