@@ -17,3 +17,17 @@
     repo: git@git.narwhal.monotremata.xyz:lan/password-store.git
     dest: /var/lib/gopass/.password-store
   become_user: gopass
+
+- name: make gopass config directory
+  file:
+    state: directory
+    path: /var/lib/gopass/.config/gopass
+    owner: gopass
+    group: gopass
+
+- name: copy gopass config
+  copy:
+    src: config.yml
+    dest: /var/lib/gopass/.config/gopass/config.yml
+    owner: gopass
+    group: gopass

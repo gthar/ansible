@@ -1,0 +1,9 @@
+autoclip: false
+autoimport: false
+cliptimeout: 45
+exportkeys: true
+nopager: false
+notifications: true
+parsing: true
+path: /var/lib/gopass/.password-store
+safecontent: false
