@@ -1,0 +1,11 @@
+---
+- name: install doas
+  apt:
+    name: doas
+
+- name: copy doas config
+  copy:
+    src: doas.conf
+    dest: /etc/doas.conf
+    owner: root
+    mode: '0644'

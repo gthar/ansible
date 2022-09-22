@@ -20,6 +20,6 @@
   include_tasks: openbsd.yml
   when: ansible_distribution == "OpenBSD"
 
-- name: setup with sudo
-  include_tasks: sudo.yml
+- name: 'debian-specific things'
+  include_tasks: debian.yml
   when: ansible_distribution in ["Debian", "Ubuntu"]
