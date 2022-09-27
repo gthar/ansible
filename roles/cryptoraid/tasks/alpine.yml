@@ -1,0 +1,20 @@
+---
+- name: install packages
+  apk:
+    name:
+      - gptfdisk
+      - sgdisk
+      - cryptsetup
+      - btrfs-progs
+      - zstd
+
+- name: load btrfs module
+  modprobe:
+    name: btrfs
+    state: present
+
+- name: btrfs module on startup
+  lineinfile:
+    path: /etc/modules
+    line: btrfs
+    insertafter: EOF

@@ -21,6 +21,14 @@
       - gopass
       - woodpecker
 
+- name: cryptoraid
+  hosts:
+    - suricata
+  become: true
+  roles:
+    - cryptoraid
+  tags: raid
+
 - name: mounts
   hosts:
     - suricata
@@ -34,7 +42,6 @@
   become: true
   roles:
     - usercfg
-  tags: test
 
 - name: pi_fan_hwpwm
   hosts:
@@ -81,7 +88,6 @@
     - narwhal
   roles:
     - gopass
-  tags: gopass
 
 - name: lbu commit
   hosts:

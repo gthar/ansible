@@ -1,0 +1,4 @@
+---
+- name: alpine setup
+  include_tasks: alpine.yml
+  when: ansible_distribution == "Alpine"
