@@ -2,10 +2,11 @@
 - name: install packages
   apk:
     name:
+      - btrfs-progs
+      - cryptsetup
+      - gnupg
       - gptfdisk
       - sgdisk
-      - cryptsetup
-      - btrfs-progs
       - zstd
 
 - name: load btrfs module
@@ -18,3 +19,45 @@
     path: /etc/modules
     line: btrfs
     insertafter: EOF
+
+- name: create script directories
+  file:
+    path: "/usr/local/{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - bin
+    - etc
+    - share
+
+- name: copy unlock scripts
+  copy:
+    src: "bin/{{ item }}"
+    dest: "/usr/local/bin/{{ item }}"
+    mode: '0755'
+  loop:
+    - remote-unlock.sh
+    - unlock-luks.sh
+
+- name: copy helper unlock files
+  copy:
+    src: share/unlock-luks-helpers.sh
+    dest: /usr/local/share/unlock-luks-helpers.sh
+    mode: '0644'
+
+- name: copy unlock config files
+  template:
+    src: unlock-luks.conf.j2
+    dest: /usr/local/etc/unlock-luks.conf
+    mode: '0644'
+
+- name: create root's ssh directory
+  file:
+    path: "/root/.ssh"
+    state: directory
+    mode: '0755'
+
+- name: copy authorized_keys
+  copy:
+    src: authorized_keys
+    dest: /root/.ssh/authorized_keys

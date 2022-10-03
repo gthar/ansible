@@ -1,0 +1,8 @@
+#!/bin/sh
+
+export SOURCE_UUIDS="{{ luks_source_uuids | join(" ") }}"
+export TARGETS="{{ luks_targets | join(" ") }}"
+export TIMEOUT="{{ luks_timeout }}"
+export YK_CHALLENGE="{{ luks_yk_challenge }}"
+export YK_SLOT="{{ luks_yk_slot }}"
+export DROPBEAR_PORT="{{ luks_dropbear_port }}"
