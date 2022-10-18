@@ -1,0 +1,29 @@
+---
+
+- name: get DAGs code
+  git:
+    repo: 'git@git.narwhal.monotremata.xyz:rilla/dags.git'
+    dest: "{{ dags_path }}"
+
+- name: install make and cron
+  pacman:
+    name:
+      - cronie
+      - make
+  when: ansible_distribution == "Archlinux"
+
+- name: add DAG to cron
+  cron:
+    name: "acme_rsync"
+    minute: "0"
+    hour: "*/6"
+    job: "{{ dags_path }}/{{ ansible_hostname }}/{{ item }}/run.sh"
+  loop:
+    "{{ dags }}"
+
+- name: enable cron
+  systemd:
+    name: cronie
+    state: started
+    enabled: true
+  when: ansible_distribution == "Archlinux"
