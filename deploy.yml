@@ -1,5 +1,13 @@
 ---
 
+- name: mount rw
+  hosts:
+    - pikvm
+  become: true
+  pre_tasks:
+    - name: mount rw
+      command: /usr/local/bin/rw
+
 - name: common roles
   hosts:
     - caladan
@@ -97,3 +105,11 @@
   become: true
   roles:
     - lbu_commit
+
+- name: mount ro
+  hosts:
+    - pikvm
+  become: true
+  post_tasks:
+    - name: mount ro
+      command: /usr/local/bin/ro
