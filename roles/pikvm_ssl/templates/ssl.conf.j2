@@ -1,0 +1,5 @@
+ssl_protocols TLSv1.3 TLSv1.2 TLSv1.1 TLSv1;
+ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH";
+ssl_certificate { kvmd_pst_data }/acme/{ domain }/fullchain.cer;
+ssl_certificate_key { kvmd_pst_data }/acme/{ domain }/{ domain }.key;
+add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;

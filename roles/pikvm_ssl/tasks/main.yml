@@ -1,0 +1,6 @@
+---
+
+- name: ssl template config
+  template:
+    src: ssl.conf.j2
+    dest: /etc/kvmd/nginx/ssl.conf
