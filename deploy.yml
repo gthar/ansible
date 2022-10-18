@@ -36,7 +36,6 @@
   become: true
   roles:
     - cryptoraid
-  tags: raid
 
 - name: mounts
   hosts:
@@ -98,7 +97,22 @@
       pikvm
   roles:
     - gopass
-  tags: gopass
+
+- name: setup DAGs
+  become: true
+  hosts:
+    - pikvm
+  roles:
+    - dags
+  tags: dags
+
+- name: set up pikvm's ssl certs
+  hosts:
+    - pikvm
+  become: true
+  hosts: pikvm
+  vars:
+    domain: monotremata.xyz
 
 - name: lbu commit
   hosts:
