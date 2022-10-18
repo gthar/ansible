@@ -23,3 +23,7 @@
 - name: 'debian-specific things'
   include_tasks: debian.yml
   when: ansible_distribution in ["Debian", "Ubuntu"]
+
+- name: 'arch-specific things'
+  include_tasks: archlinux.yml
+  when: ansible_distribution == "Archlinux"

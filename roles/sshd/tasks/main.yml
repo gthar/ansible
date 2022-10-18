@@ -12,3 +12,7 @@
 - name: setup alpine ssh
   include_tasks: alpine.yml
   when: ansible_distribution == "Alpine"
+
+- name: setup arch ssh
+  include_tasks: archlinux.yml
+  when: ansible_distribution == "Archlinux"

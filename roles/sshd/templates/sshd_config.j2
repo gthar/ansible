@@ -113,8 +113,10 @@ Subsystem  sftp  /usr/libexec/sftp-server
 Subsystem  sftp  /usr/lib/ssh/sftp-server
 {% elif ansible_distribution == "Ubuntu" %}
 Subsystem  sftp  /usr/lib/openssh/sftp-server
+{% elif ansible_distribution == "Archlinux" %}
+Subsystem  sftp  /usr/lib/ssh/sftp-server
 {% else %}
-# I don't know what OS that is, Ansible guessed on using the same config as Alpine
+# I don't know what OS that is, Ansible guessed on using the same config as Alpine and Arch
 Subsystem  sftp  /usr/lib/ssh/sftp-server
 {% endif %}
 

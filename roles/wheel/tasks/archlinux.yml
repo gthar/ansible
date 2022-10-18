@@ -1,0 +1,11 @@
+---
+- name: install doas
+  pacman:
+    name: opendoas
+
+- name: copy doas config
+  copy:
+    src: doas.conf
+    dest: /etc/doas.conf
+    owner: root
+    mode: '0644'

@@ -18,3 +18,9 @@
     name:
       - python3
   when: ansible_distribution == "OpenBSD"
+
+- name: install python3
+  pacman:
+    name:
+      - python3
+  when: ansible_distribution == "Archlinux"
