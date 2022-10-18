@@ -95,8 +95,10 @@
     - caladan
     - fugu
     - narwhal
+      pikvm
   roles:
     - gopass
+  tags: gopass
 
 - name: lbu commit
   hosts:

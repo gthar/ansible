@@ -29,3 +29,11 @@
   openbsd_pkg:
     name: gopass
   when: ansible_distribution == "OpenBSD"
+
+- name: install gopass (Archlinux)
+  pacman:
+    name:
+      - git
+      - gnupg
+      - gopass
+  when: ansible_distribution == "Archlinux"
