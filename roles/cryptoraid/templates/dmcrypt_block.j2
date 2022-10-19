@@ -3,9 +3,11 @@
 # {{ entry.name }}
 target='{{ entry.target }}'
 source='/dev/disk/by-uuid/{{ entry.source_uuid }}'
-{% if entry.key is defined %}key={{ entry.key }}
+{% if entry.key is defined %}key='{{ entry.key }}'
 {% endif %}
-{% if entry.remdev is defined %}remdev={{ entry.remdev }}
+{% if entry.remdev is defined %}remdev='{{ entry.remdev }}'
+{% endif %}
+{% if entry.options is defined %}options='{{ entry.options }}'
 {% endif %}
 
 {% endfor %}
