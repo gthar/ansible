@@ -3,5 +3,9 @@
 # {{ entry.name }}
 target='{{ entry.target }}'
 source='/dev/disk/by-uuid/{{ entry.source_uuid }}'
+{% if entry.key is defined %}key={{ entry.key }}
+{% endif %}
+{% if entry.remdev is defined %}remdev={{ entry.remdev }}
+{% endif %}
 
 {% endfor %}

@@ -31,3 +31,20 @@
     name: dmcrypt
     enabled: true
     runlevel: boot
+
+- name: copy btrfs-scan init script
+  copy:
+    dest: /etc/init.d/btrfs-scan
+    src: btrfs-scan
+    mode: '0755'
+
+- name: add btrfs-scan init script to lbu
+  lbu:
+    include: /etc/init.d/btrfs-scan
+  when: use_lbu
+
+- name: enable btrfs-scan at boot
+  service:
+    name: btrfs-scan
+    enabled: true
+    runlevel: boot
