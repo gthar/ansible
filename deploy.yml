@@ -15,7 +15,7 @@
     - narwhal
     - snitch
     - suricata
-    - pikvm
+    # - pikvm
   become: true
   roles:
     - basic
@@ -95,7 +95,7 @@
     - caladan
     - fugu
     - narwhal
-      pikvm
+    # - pikvm
   roles:
     - gopass
 
