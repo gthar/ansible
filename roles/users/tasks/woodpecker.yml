@@ -38,4 +38,4 @@
       - /var/lib/woodpecker
     exclude:
       - /var/lib/woodpecker/.ash_history
-  when: ansible_distribution == "Alpine" and use_lbu
+  when: ansible_distribution == "Alpine" and alpine_mode in ["diskless", "data"]

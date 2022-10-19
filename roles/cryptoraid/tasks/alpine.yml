@@ -41,7 +41,7 @@
 - name: add btrfs-scan init script to lbu
   lbu:
     include: /etc/init.d/btrfs-scan
-  when: use_lbu
+  when: alpine_mode in ["diskless", "data"]
 
 - name: enable btrfs-scan at boot
   service:

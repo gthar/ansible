@@ -26,4 +26,4 @@
       - /var/lib/gopass
     exclude:
       - /var/lib/gopass/.ash_history
-  when: ansible_distribution == "Alpine" and use_lbu
+  when: ansible_distribution == "Alpine" and alpine_mode in ["diskless", "data"]

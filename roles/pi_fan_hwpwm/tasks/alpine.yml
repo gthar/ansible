@@ -49,7 +49,7 @@
     include:
       - /usr/local/sbin/pi_fan_hwpwm
       - /etc/init.d/pi_fan_hwpwm
-  when: ansible_distribution == "Alpine" and use_lbu
+  when: ansible_distribution == "Alpine" and alpine_mode in ["diskless", "data"]
 
 - name: add iomem=relaxed to cmdline.txt
   replace:

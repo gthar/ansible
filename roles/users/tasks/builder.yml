@@ -34,4 +34,4 @@
     exclude:
       - /var/lib/builder/.ash_history
       - /var/lib/builder/src
-  when: ansible_distribution == "Alpine" and use_lbu
+  when: ansible_distribution == "Alpine" and alpine_mode in ["diskless", "data"]

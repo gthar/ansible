@@ -94,4 +94,4 @@
     exclude:
       - /home/rilla/.local/share/nvim
       - /home/rilla/.cache
-  when: ansible_distribution == "Alpine" and use_lbu
+  when: ansible_distribution == "Alpine" and alpine_mode == "diskless"
