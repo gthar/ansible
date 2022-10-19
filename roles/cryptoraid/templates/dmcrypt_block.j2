@@ -1,0 +1,7 @@
+
+{% for entry in dmcrypt_targets %}
+# {{ entry.name }}
+target='{{ entry.target }}'
+source='/dev/disk/by-uuid/{{ entry.source_uuid }}'
+
+{% endfor %}

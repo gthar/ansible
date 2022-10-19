@@ -36,6 +36,7 @@
   become: true
   roles:
     - cryptoraid
+  tags: raid
 
 - name: mounts
   hosts:

@@ -20,44 +20,14 @@
     line: btrfs
     insertafter: EOF
 
-- name: create script directories
-  file:
-    path: "/usr/local/{{ item }}"
-    state: directory
-    mode: '0755'
-  loop:
-    - bin
-    - etc
-    - share
+- name: add drive block to dmcrypt config
+  blockinfile:
+    insertbefore: leave this comment last
+    path: /etc/conf.d/dmcrypt
+    block: "{{ lookup('template', 'dmcrypt_block.j2') }}"
 
-- name: copy unlock scripts
-  copy:
-    src: "bin/{{ item }}"
-    dest: "/usr/local/bin/{{ item }}"
-    mode: '0755'
-  loop:
-    - remote-unlock.sh
-    - unlock-luks.sh
-
-- name: copy helper unlock files
-  copy:
-    src: share/unlock-luks-helpers.sh
-    dest: /usr/local/share/unlock-luks-helpers.sh
-    mode: '0644'
-
-- name: copy unlock config files
-  template:
-    src: unlock-luks.conf.j2
-    dest: /usr/local/etc/unlock-luks.conf
-    mode: '0644'
-
-- name: create root's ssh directory
-  file:
-    path: "/root/.ssh"
-    state: directory
-    mode: '0755'
-
-- name: copy authorized_keys
-  copy:
-    src: authorized_keys
-    dest: /root/.ssh/authorized_keys
+- name: enable dmcrypt at boot
+  service:
+    name: dmcrypt
+    enabled: true
+    runlevel: boot
