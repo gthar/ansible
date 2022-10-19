@@ -120,8 +120,11 @@
     - snitch
     - suricata
   become: true
-  roles:
-    - lbu_commit
+  post_tasks:
+    - name: lbu commit
+      lbu:
+        commit: true
+      when: ansible_distribution == "Alpine" and alpine_mode in ["diskless", "data"]
 
 - name: mount ro
   hosts:
