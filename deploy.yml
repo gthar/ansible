@@ -111,7 +111,6 @@
   hosts:
     - pikvm
   become: true
-  hosts: pikvm
   vars:
     domain: monotremata.xyz
 

@@ -2,3 +2,14 @@
 - name: alpine setup
   include_tasks: alpine.yml
   when: ansible_distribution == "Alpine"
+
+- name: copy maintainance scripts
+  copy:
+    src: "bin/{{ item }}"
+    dest: "/usr/local/bin/{{ item }}"
+    mode: "755"
+  loop:
+    - "btr_defrag.sh"
+    - "btr_balance.sh"
+    - "btr_scrub.sh"
+    - "fs_trim.sh"

@@ -2,6 +2,7 @@
 - name: install packages
   apk:
     name:
+      - btrbk
       - btrfs-progs
       - cryptsetup
       - gnupg
