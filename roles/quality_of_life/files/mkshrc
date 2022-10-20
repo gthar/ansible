@@ -7,3 +7,4 @@ PS1=$'\n\e[34m${USER}@${HOSTNAME}\e[36m:\${PWD/}\e[00m\n❯ '
 
 alias vi=nvim
 alias vim=nvim
+alias ls="ls --color"
