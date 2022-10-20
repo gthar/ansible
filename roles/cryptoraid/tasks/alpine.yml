@@ -3,6 +3,7 @@
   apk:
     name:
       - btrbk
+      - coreutils  # needed by btrbk
       - btrfs-progs
       - cryptsetup
       - gnupg

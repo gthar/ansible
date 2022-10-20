@@ -13,3 +13,8 @@
     - "btr_balance.sh"
     - "btr_scrub.sh"
     - "fs_trim.sh"
+
+- name: copy btrbk config
+  copy:
+    src: "host_files/btrbk/{{ ansible_hostname }}/btrbk.conf"
+    dest: /etc/btrbk/btrbk.conf
