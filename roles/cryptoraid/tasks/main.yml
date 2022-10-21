@@ -14,6 +14,15 @@
     - "btr_scrub.sh"
     - "fs_trim.sh"
 
+- name: include btrfs maintainance scripts to lbu
+  lbu:
+    include:
+      - /usr/local/bin/btr_defrag.sh
+      - /usr/local/bin/btr_balance.sh
+      - /usr/local/bin/btr_scrub.sh
+      - /usr/local/bin/fs_trim.sh
+  when: ansible_distribution == "Alpine" and alpine_mode in ["diskless", "data"]
+
 - name: copy btrbk config
   copy:
     src: "host_files/btrbk/{{ ansible_hostname }}/btrbk.conf"
