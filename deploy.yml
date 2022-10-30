@@ -146,8 +146,12 @@
   become: true
   post_tasks:
     - name: lbu commit
-      lbu:
-        commit: true
+      # I use the shell module instead of the lbu one because the lbu module
+      # doesn't seem to work with encryption
+      shell:
+        cmd: lbu commit
+      environment:
+        PASSWORD: '{{ lbu_password }}'
       when: ansible_distribution == "Alpine" and alpine_mode in ["diskless", "data"]
 
 - name: mount ro
