@@ -1,0 +1,29 @@
+---
+
+# The version for a given channel can be found with
+#
+# ```sh
+# CHANNEL_URL=${CHANNEL_URL:-'https://update.k3s.io/v1-release/channels'}
+# CHANNEL=${CHANNEL:-'stable'}
+# curl \
+#     --write-out '%{url_effective}' \
+#     --location \
+#     --silent \
+#     --show-error \
+#     "${CHANNEL_URL}/${CHANNEL}" \
+#     -o /dev/null |
+#     sed -e 's|.*/||'
+# ```
+k3s_version: v1.24.6+k3s1
+
+k3s_suffix_lookup:
+  amd64: ""
+  x86_64: ""
+  arm64: "-arm64"
+  aarch64: "-arm64"
+  armv7l: "-armhf"  # any other arm* should be `-armhf` too
+  s390x: "-s390x"
+
+k3s_releases_url: "https://github.com/k3s-io/k3s/releases/download"
+
+k3s_download_base_url: "{{ k3s_releases_url }}/{{ k3s_version }}"
