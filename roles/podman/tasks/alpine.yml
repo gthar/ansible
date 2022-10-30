@@ -1,0 +1,44 @@
+---
+
+- name: install podman with apk
+  apk:
+    name:
+      - podman
+
+- name: enable cgroups v2
+  lineinfile:
+    path: /etc/rc.conf
+    line: 'rc_cgroup_mode="unified"'
+    regexp: '#?rc_cgroup_mode=".+"'
+
+- name: start and enable cgroups
+  service:
+    name: cgroups
+    state: started
+    enabled: true
+
+- name: set podman storage driver
+  lineinfile:
+    path: /etc/containers/storage.conf
+    line: 'driver = "{{ podman_storage_driver }}"'
+    regexp: '"driver = ".+"'
+
+- name: load tun module for rootless podman support
+  modprobe:
+    name: tun
+    state: present
+
+- name: tun module on startup
+  lineinfile:
+    path: /etc/modules
+    line: tun
+    insertafter: EOF
+
+- name: lines for podman rootless support on /etc/subuid and /etc/subgid
+  lineinfile:
+    path: "{{ item }}"
+    line: "{{ main_user }}:100000:65536"
+    insertafter: EOF
+  loop:
+    - /etc/subuid
+    - /etc/subgid

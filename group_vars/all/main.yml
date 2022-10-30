@@ -7,3 +7,5 @@ deb_arch_mapping: {
   "x86_64": "amd64",
   "i386": "i386"
 }
+
+main_user: rilla
