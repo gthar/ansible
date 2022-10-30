@@ -1,0 +1,5 @@
+---
+
+- name: 'alpine-specific docker things'
+  include_tasks: alpine.yml
+  when: ansible_distribution == "Alpine"

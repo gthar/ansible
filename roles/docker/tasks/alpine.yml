@@ -1,0 +1,14 @@
+---
+
+- name: install docker with apk
+  apk:
+    name:
+      - docker
+      - docker-compose
+
+- name: start and enable docker
+  service:
+    name: docker
+    state: started
+    enabled: true
+    runlevel: boot
