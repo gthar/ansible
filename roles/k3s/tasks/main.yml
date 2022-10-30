@@ -4,19 +4,25 @@
   set_fact:
     k3s_suffix: "{{ k3s_suffix_lookup[ansible_architecture] }}"
 
+- name: create k3s opt directory
+  file:
+    path: /opt/k3s
+    state: directory
+
 - name: download k3s binary
   get_url:
     url: "{{ k3s_download_base_url }}/k3s{{ k3s_suffix }}"
-    dest: /usr/local/bin/k3s
+    dest: /opt/k3s/k3s
     checksum: "sha256:{{ k3s_download_base_url }}/sha256sum{{ k3s_suffix }}.txt"
     mode: '0755'
 
 - name: create k3s symlinks
   file:
     state: link
-    src: /usr/local/bin/k3s
+    src: /opt/k3s/k3s
     dest: "/usr/local/bin/{{ item }}"
   loop:
+    - k3s
     - kubectl
     - crictl
     - ctr
@@ -65,6 +71,5 @@
       - /usr/local/bin/kubectl
       - /usr/local/bin/crictl
       - /usr/local/bin/ctr
-      - /etc/rancher/k3s/k3s.env
       - /etc/init.d/k3s
   when: ansible_distribution == "Alpine" and alpine_mode in ["diskless", "data"]
