@@ -22,6 +22,18 @@
     line: btrfs
     insertafter: EOF
 
+- name: make directory for dmcrypt keys
+  file:
+    path: /etc/dmcrypt
+    state: directory
+
+- name: copy luks key file
+  copy:
+    src: "host_files/luks/{{ ansible_hostname }}/key.bin"
+    dest: /etc/dmcrypt/key.bin
+    mode: '0600'
+    owner: root
+
 - name: add drive block to dmcrypt config
   blockinfile:
     insertbefore: leave this comment last
