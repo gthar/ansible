@@ -1,0 +1,22 @@
+# what cipher to use with -e option
+DEFAULT_CIPHER={{ lbu_cipher }}
+
+# Uncomment the row below to encrypt config by default
+{% if lbu_encrypt %}
+ENCRYPTION=$DEFAULT_CIPHER
+{% else %}
+# ENCRYPTION=$DEFAULT_CIPHER
+{% endif %}
+
+# Uncomment below to avoid <media> option to 'lbu commit'
+# Can also be set to 'floppy'
+LBU_MEDIA={{ lbu_media }}
+
+# Set the LBU_BACKUPDIR variable in case you prefer to save the apkovls
+# in a normal directory instead of mounting an external media.
+{% if lbu_backupdir is defined %}
+LBU_BACKUPDIR={{ lbu_backupdir }}
+{% endif %}
+
+# Uncomment below to let lbu make up to 3 backups
+BACKUP_LIMIT={{ lbu_backup_limit }}

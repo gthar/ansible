@@ -1,0 +1,6 @@
+---
+
+lbu_cipher: aes-256-cbc
+lbu_encrypt: false
+lbu_media: mmcblk0p1
+lbu_backup_limit: 5

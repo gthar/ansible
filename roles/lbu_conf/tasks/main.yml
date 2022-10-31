@@ -1,0 +1,11 @@
+---
+
+- name: make lbu config dir
+  file:
+    path: /etc/lbu
+    state: directory
+
+- name: render lbu.conf template
+  template:
+    src: lbu.conf.j2
+    dest: /etc/lbu/lbu.conf

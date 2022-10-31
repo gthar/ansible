@@ -29,6 +29,14 @@
     - cryptoraid
   tags: raid
 
+- name: lbu.conf
+  hosts:
+    - suricata
+  become: true
+  roles:
+    - lbu_conf
+  tags: lbu_conf
+
 - name: mounts
   hosts:
     - suricata
@@ -174,4 +182,4 @@
       command: /usr/local/bin/ro
 
 # todo:
-# setup-apkcache and setup-lbu to use /media/mmcblk0p2
+# setup-apkcache to use /media/mmcblk0p2
