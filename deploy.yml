@@ -8,6 +8,19 @@
     - name: mount rw
       command: /usr/local/bin/rw
 
+- name: basic roles
+  hosts:
+    - caladan
+    - fugu
+    - narwhal
+    - snitch
+    - suricata
+    # - pikvm
+  become: true
+  roles:
+    - repos
+    - basic
+
 - name: cryptoraid
   hosts:
     - suricata
@@ -30,13 +43,6 @@
   roles:
     - usercfg
 
-- name: pi_fan_hwpwm
-  hosts:
-    - suricata
-  become: true
-  roles:
-    - pi_fan_hwpwm
-
 - name: docker
   hosts:
     - caladan
@@ -44,14 +50,6 @@
   become: true
   roles:
     - docker
-
-- name: podman
-  hosts:
-    - suricata
-  become: true
-  roles:
-    - podman
-  tags: podman
 
 - name: common roles
   hosts:
@@ -63,9 +61,7 @@
     # - pikvm
   become: true
   roles:
-    - basic
     - users
-    - repos
     - sshd
   vars:
     users:
@@ -74,7 +70,6 @@
       - builder
       - gopass
       - woodpecker
-
 
 - name: quality of life tools
   hosts:
@@ -85,6 +80,21 @@
   become: true
   roles:
     - quality_of_life
+
+- name: pi_fan_hwpwm
+  hosts:
+    - suricata
+  become: true
+  roles:
+    - pi_fan_hwpwm
+
+- name: podman
+  hosts:
+    - suricata
+  become: true
+  roles:
+    - podman
+  tags: podman
 
 - name: wifi setup
   hosts: snitch
@@ -150,8 +160,6 @@
       # doesn't seem to work with encryption
       shell:
         cmd: lbu commit
-      environment:
-        PASSWORD: '{{ lbu_password }}'
       when: ansible_distribution == "Alpine" and alpine_mode in ["diskless", "data"]
 
 - name: mount ro
