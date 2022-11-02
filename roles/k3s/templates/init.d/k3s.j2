@@ -13,6 +13,9 @@ supervisor=supervise-daemon
 name=k3s
 command="/usr/local/bin/k3s"
 command_args="server \
+    {% for arg in k3s_args %}
+        {{ arg }} \
+    {% endfor %}
     >>/var/log/k3s.log 2>&1"
 
 output_log=/var/log/k3s.log

@@ -41,9 +41,9 @@
     access_time: preserve
 
 - name: copy service file
-  copy:
-    src: init.d/k3s
-    dest: /etc/init.d
+  template:
+    src: init.d/k3s.j2
+    dest: /etc/init.d/k3s
     mode: '0755'
   when: ansible_distribution == "Alpine"
 
