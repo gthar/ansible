@@ -118,6 +118,7 @@
   become: true
   roles:
     - btrbk
+  tags: btrbk
 
 - name: caladan-specific things
   hosts: caladan
