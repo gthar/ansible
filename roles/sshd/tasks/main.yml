@@ -6,6 +6,11 @@
     mode: '0644'
     owner: root
 
+- name: create authorized_keys directory
+  file:
+    state: directory
+    path: /etc/ssh/authorized_keys
+
 - name: setup host ssh certificates
   include_tasks: certs.yml
 
