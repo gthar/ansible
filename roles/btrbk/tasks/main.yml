@@ -23,30 +23,17 @@
     src: "host_files/btrbk/{{ ansible_hostname }}/btrbk.conf"
     dest: /etc/btrbk/btrbk.conf
 
-- name: make btrbk user ssh directory
-  file:
-    state: directory
-    path: /var/lib/btrbk/.ssh
-    owner: btrbk
-
-- name: copy btrbk user ssh key
+- name: copy btrbk ssh key
   copy:
     src: id_ed25519
-    dest: /var/lib/btrbk/.ssh/id_ed25519
+    dest: /etc/btrbk/id_ed25519
     owner: btrbk
     mode: '0400'
-
-- name: copy btrbk user ssh public key
-  copy:
-    src: id_ed25519.pub
-    dest: /var/lib/btrbk/.ssh/id_ed25519.pub
-    owner: btrbk
-    mode: '0644'
 
 - name: copy btrbk user ssh public key to authorized_keys
   copy:
     src: id_ed25519.pub
-    dest: /var/lib/btrbk/.ssh/authorized_keys
+    dest: /etc/ssh/authorized_keys/btrbk
     owner: btrbk
     mode: '0644'
 
@@ -54,7 +41,4 @@
   lbu:
     include:
       - /usr/local/bin/btrbk
-      - /var/lib/btrbk/.ssh/id_ed25519
-      - /var/lib/btrbk/.ssh/id_ed25519.pub
-      - /var/lib/btrbk/.ssh/authorized_keys
   when: ansible_distribution == "Alpine" and alpine_mode in ["diskless", "data"]
