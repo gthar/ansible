@@ -19,8 +19,8 @@
   file:
     state: directory
     path: /var/lib/btrbk
-    owner: brtrbk
-    group: brtrbk
+    owner: btrbk
+    group: btrbk
     mode: '2755'
 
 - name: commit btrbk's home to lbu
