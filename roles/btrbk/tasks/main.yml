@@ -7,6 +7,17 @@
   include_tasks: debian.yml
   when: ansible_distribution in ["Debian", "Ubuntu"]
 
+- name: create btrbk directory config
+  file:
+    state: directory
+    path: /etc/btrbk
+
+- name: download btrbk executable
+  get_url:
+    url: '{{ btrbk_url }}'
+    dest: /usr/local/bin/btrbk
+    mode: '0755'
+
 - name: copy btrbk config
   copy:
     src: "host_files/btrbk/{{ ansible_hostname }}/btrbk.conf"
@@ -39,9 +50,10 @@
     owner: btrbk
     mode: '0644'
 
-- name: add btrbk ssh keys to lbu
+- name: add btrbk files to lbu
   lbu:
     include:
+      - /usr/local/bin/btrbk
       - /var/lib/btrbk/.ssh/id_ed25519
       - /var/lib/btrbk/.ssh/id_ed25519.pub
       - /var/lib/btrbk/.ssh/authorized_keys

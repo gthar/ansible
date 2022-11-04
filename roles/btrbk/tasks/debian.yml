@@ -2,5 +2,8 @@
 - name: install packages
   apt:
     name:
-      - btrbk
       - btrfs-progs
+      - mbuffer
+      - openssh-client
+      - openssh-server
+      - perl
