@@ -75,6 +75,7 @@
     users:
       - rilla
       - ansible
+      - btrbk
       - builder
       - gopass
       - woodpecker
@@ -109,6 +110,14 @@
   become: true
   roles:
     - wifi
+
+- name: btrbk
+  hosts:
+    - narwhal
+    - suricata
+  become: true
+  roles:
+    - btrbk
 
 - name: caladan-specific things
   hosts: caladan

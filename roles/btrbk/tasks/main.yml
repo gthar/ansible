@@ -1,0 +1,13 @@
+---
+- name: alpine setup
+  include_tasks: alpine.yml
+  when: ansible_distribution == "Alpine"
+
+- name: debian/ubuntu setup
+  include_tasks: debian.yml
+  when: ansible_distribution in ["Debian", "Ubuntu"]
+
+- name: copy btrbk config
+  copy:
+    src: "host_files/btrbk/{{ ansible_hostname }}/btrbk.conf"
+    dest: /etc/btrbk/btrbk.conf

@@ -1,0 +1,32 @@
+---
+- name: create group 'btrbk'
+  group:
+    name: btrbk
+    gid: 505
+
+- name: create user 'btrbk'
+  user:
+    name: btrbk
+    uid: 505
+    group: btrbk
+    home: /var/lib/btrbk
+    password: "*"  # disabled password but can be accessed with SSH
+    groups:
+      - wheel
+    append: true
+
+- name: make sure btrbk owns its home
+  file:
+    state: directory
+    path: /var/lib/btrbk
+    owner: brtrbk
+    group: brtrbk
+    mode: '2755'
+
+- name: commit btrbk's home to lbu
+  lbu:
+    include:
+      - /var/lib/btrbk
+    exclude:
+      - /var/lib/btrbk/.ash_history
+  when: ansible_distribution == "Alpine" and alpine_mode in ["diskless", "data"]
