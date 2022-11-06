@@ -15,6 +15,15 @@
       - wheel
     append: true
 
+- name: additional groups to btrbk
+  user:
+    name: btrbk
+    groups: "{{item}}"
+    append: true
+  when: item in ansible_facts.getent_group
+  with_items:
+    - syslog
+
 - name: make sure btrbk owns its home
   file:
     state: directory
