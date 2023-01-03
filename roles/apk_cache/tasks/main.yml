@@ -1,0 +1,12 @@
+---
+
+- name: make sure apk_cache_dir exists
+  file:
+    path: "{{ apk_cache_dir }}"
+    state: directory
+
+- name: link the apk cache dir
+  file:
+    state: link
+    src: "{{ apk_cache_dir }}"
+    dest: /etc/apk/cache
