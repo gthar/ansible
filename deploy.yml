@@ -190,6 +190,18 @@
         PASSWORD: '{{ lbu_password }}'
       when: ansible_distribution == "Alpine" and alpine_mode in ["diskless", "data"]
 
+    - name: create lbu backups directory
+      file:
+        state: directory
+        path: /mnt/backups/lbu
+
+    # todo: use less hardcoding
+    - name: make a more permanent lbu backup
+      copy:
+        src: "{{ lbu_backupdir }}/{{ ansible_hostname }}.apkovl.tar.gz.aes-256-cbc"
+        dest: "/mnt/backups/lbu/{{ ansible_hostname }}.apkovl.tar.gz.aes-256-cbc.{{ ansible_date_time.iso8601 }}"
+        remote_src: true
+
 - name: mount ro
   hosts:
     - pikvm
@@ -197,6 +209,3 @@
   post_tasks:
     - name: mount ro
       command: /usr/local/bin/ro
-
-# todo:
-# setup-apkcache to use /media/mmcblk0p2
