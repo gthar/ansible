@@ -22,8 +22,3 @@
       - /usr/local/bin/btr_scrub.sh
       - /usr/local/bin/fs_trim.sh
   when: ansible_distribution == "Alpine" and alpine_mode in ["diskless", "data"]
-
-- name: copy btrbk config
-  copy:
-    src: "host_files/btrbk/{{ ansible_hostname }}/btrbk.conf"
-    dest: /etc/btrbk/btrbk.conf
