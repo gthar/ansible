@@ -8,6 +8,8 @@
       - neovim
       - ripgrep
       - tmux
+      - mandoc
+      - man-pages
   when: ansible_distribution == "Alpine"
 
 - name: install python3
