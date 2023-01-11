@@ -1,0 +1,29 @@
+---
+
+- name: install nfs-utils with apk
+  apk:
+    name: nfs-utils
+
+- name: set NFS's `NFS_NEEDED_SERVICES`
+  lineinfile:
+    path: /etc/conf.d/nfs
+    regexp: '^NFS_NEEDED_SERVICES='
+    line: 'NFS_NEEDED_SERVICES="rpc.idmapd"'
+
+- name: set NFS's `OPTS_RPC_NFSD`
+  lineinfile:
+    path: /etc/conf.d/nfs
+    regexp: '^OPTS_RPC_NFSD='
+    line: 'OPTS_RPC_NFSD="8 -N 3 -V 4"'
+
+- name: set NFS's `OPTS_RPC_MOUNTD`
+  lineinfile:
+    path: /etc/conf.d/nfs
+    regexp: '^OPTS_RPC_MOUNTD'
+    line: 'OPTS_RPC_MOUNTD="-N 3 -V 4"'
+
+- name: start and enable nfs
+  service:
+    name: nfs
+    state: started
+    enabled: true

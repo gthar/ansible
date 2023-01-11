@@ -36,6 +36,14 @@
   roles:
     - mounts
 
+- name: nfs-server
+  hosts:
+    - suricata
+  become: true
+  roles:
+    - nfs-server
+  tags: nfs
+
 - name: usercfg
   hosts:
     - suricata

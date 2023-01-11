@@ -1,0 +1,16 @@
+---
+
+- name: render /etc/exports
+  template:
+    src: exports.j2
+    dest: /etc/exports
+    mode: '0644'
+  register: exports
+
+- name: alpine-specific nfs server tasks
+  include_tasks: alpine.yml
+  when: ansible_distribution == "Alpine"
+
+- name: export nfs exports
+  command: /usr/sbin/exportfs -arv
+  when: exports.changed

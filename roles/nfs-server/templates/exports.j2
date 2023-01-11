@@ -1,0 +1,8 @@
+{% for export in nfs_exports %}
+    {{- export.path }}{% for host in export.hosts %}
+        {{ host.hostname }}({% for option in host.options -%}
+            {{- option }},
+        {%- endfor %})
+    {%- endfor %}
+
+{% endfor %}
