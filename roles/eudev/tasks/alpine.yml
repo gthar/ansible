@@ -1,0 +1,52 @@
+---
+
+- name: disable mdev
+  service:
+    name: "{{ item }}"
+    runlevel: sysinit
+    state: stopped
+    enabled: false
+  loop:
+    - hwdrivers
+    - mdev
+
+- name: disable mdevd
+  service:
+    name: "{{ item }}"
+    runlevel: sysinit
+    state: stopped
+    enabled: false
+  loop:
+    - mdevd
+    - mdevd-init
+    - hwdrivers
+
+- name: keep mdevd-openrc uninstalled
+  apk:
+    name: mdevd-openrc
+    state: absent
+
+- name: install eudev
+  apk:
+    name:
+      - eudev
+      - udev-init-scripts
+      - udev-init-scripts-openrc
+
+- name: enable udev
+  service:
+    name: "{{ item }}"
+    runlevel: sysinit
+    state: started
+    enabled: true
+  loop:
+    - udev
+    - udev-trigger
+    - udev-settle
+
+- name: enable udev-postmount
+  service:
+    name: udev-postmount
+    runlevel: default
+    state: started
+    enabled: true

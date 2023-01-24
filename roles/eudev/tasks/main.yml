@@ -1,0 +1,5 @@
+---
+
+- name: 'setup eudev for alpine'
+  include_tasks: alpine.yml
+  when: ansible_distribution == "Alpine"
