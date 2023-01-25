@@ -1,0 +1,14 @@
+---
+
+- name: keep nut-server uninstalled from Debian/Ubuntu in client mode
+  apt:
+    name: nut-server
+    state: absent
+  when: ansible_distribution in ["Debian", "Ubuntu"]
+
+- name: mask nut-server when using client-only with Arch
+  systemd:
+    name: nut-server
+    state: stopped
+    masked: true
+  when: ansible_distribution == "Archlinux"

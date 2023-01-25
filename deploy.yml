@@ -166,8 +166,9 @@
 
 - name: set up NUT
   hosts:
-    - suricata
     - narwhal
+    - pikvm
+    - suricata
   become: true
   roles:
     - nut

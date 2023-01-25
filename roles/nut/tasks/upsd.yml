@@ -34,3 +34,17 @@
     state: started
     enabled: true
   when: ansible_distribution == "Alpine"
+
+- name: start and enable nut-server
+  systemd:
+    name: nut-server
+    state: started
+    enabled: true
+  when: ansible_distribution in ["Debian", "Ubuntu"]
+
+- name: start and enable nut-driver-enumerator
+  systemd:
+    name: nut-driver-enumerator
+    state: started
+    enabled: true
+  when: ansible_distribution == "Archlinux"

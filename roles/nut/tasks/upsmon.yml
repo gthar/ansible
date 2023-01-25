@@ -11,7 +11,7 @@
     block: |
       MONITOR {{ nut_device.name }}@{{ nut_host }} 1 upsmon {{ nut_upsmon_password }} {{ nut_types[nut_mode] }}
 
-- name: start and enable nut-upsmon
+- name: start and enable nut-upsmon with openrc
   service:
     name: nut-upsmon
     runlevel: default
@@ -19,9 +19,9 @@
     enabled: true
   when: ansible_distribution == "Alpine"
 
-- name: start and enable nut-monitor
+- name: start and enable nut-monitor with systemd
   systemd:
     name: nut-monitor
     state: started
     enabled: true
-  when: ansible_distribution in ["Debian", "Ubuntu"]
+  when: ansible_distribution in ["Debian", "Ubuntu", "Archlinux"]
