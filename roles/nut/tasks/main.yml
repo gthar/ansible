@@ -1,0 +1,26 @@
+---
+
+- name: install NUT for alpine
+  apk:
+    name:
+      - nut
+  when: ansible_distribution == "Alpine"
+
+- name: set NUT mode
+  lineinfile:
+    path: /etc/nut/nut.conf
+    regexp: '^MODE='
+    line: "MODE={{ nut_mode }}"
+
+- name: set up /etc/nut/upsmon.conf
+  blockinfile:
+    path: /etc/nut/upsmon.conf
+    block: |
+      MONITOR {{ nut_device.name }} 1 {{ nut_upsmon_password }} {{ nut_types[nut_mode] }}
+
+- name: set up upsd
+  include_tasks: upsd.yml
+  when: nut_mode in ["standalone", "netserver"]
+
+- name: set up upsmon
+  include_tasks: upsmon.yml

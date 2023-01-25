@@ -8,6 +8,13 @@
     - name: mount rw
       command: /usr/local/bin/rw
 
+- name: set-up eudev
+  hosts: suricata
+  become: true
+  roles:
+    - eudev
+  tags: eudev
+
 - name: basic roles
   hosts:
     - caladan
@@ -156,6 +163,14 @@
   become: true
   roles:
     - wireguard
+
+- name: set up NUT
+  hosts:
+    - suricata
+  become: true
+  roles:
+    - nut
+  tags: nut
 
 - name: setup gopass
   become: true

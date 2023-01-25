@@ -1,0 +1,15 @@
+---
+
+- name: set up /etc/nut/upsmon.conf
+  blockinfile:
+    path: /etc/nut/upsmon.conf
+    block: |
+      MONITOR {{ nut_device.name }} 1 upsmon {{ nut_upsmon_password }} {{ nut_types[nut_mode] }}
+
+- name: start and enable nut-upsmon
+  service:
+    name: nut-upsmon
+    runlevel: default
+    state: started
+    enabled: true
+  when: ansible_distribution == "Alpine"

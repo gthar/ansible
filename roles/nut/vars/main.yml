@@ -1,0 +1,4 @@
+nut_types:
+  standalone: primary
+  netserver: primary
+  clientserver: secondary
