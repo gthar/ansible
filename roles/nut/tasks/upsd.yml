@@ -27,6 +27,12 @@
         password = "{{ nut_upsmon_password }}"
         upsmon {{ nut_types[nut_mode] }}
 
+- name: add LISTEN line to /etc/nut/upsd.conf
+  lineinfile:
+    path: /etc/nut/upsd.conf
+    regexp: '^LISTEN'
+    line: "LISTEN {{ nut_listen }}"
+
 - name: start and enable nut-upsd
   service:
     name: nut-upsd
