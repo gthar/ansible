@@ -27,11 +27,13 @@
         password = "{{ nut_upsmon_password }}"
         upsmon {{ nut_types[nut_mode] }}
 
-- name: add LISTEN line to /etc/nut/upsd.conf
-  lineinfile:
+- name: allow NUT to listen to all IPs
+  blockinfile:
     path: /etc/nut/upsd.conf
-    regexp: '^LISTEN'
-    line: "LISTEN {{ nut_listen }}"
+    block: |
+      LISTEN 0.0.0.0
+      LISTEN ::1
+  when: nut_mode == "netserver"
 
 - name: start and enable nut-upsd
   service:
