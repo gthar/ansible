@@ -1,5 +1,11 @@
 ---
 
+- name: install server for Debian / Ubuntu
+  apt:
+    name:
+      - nut-server
+  when: ansible_distribution in ["Debian", "Ubuntu"]
+
 - name: add UPS device(s) config to /etc/nut/ups.conf
   blockinfile:
     path: /etc/nut/ups.conf

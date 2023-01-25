@@ -167,6 +167,7 @@
 - name: set up NUT
   hosts:
     - suricata
+    - narwhal
   become: true
   roles:
     - nut

@@ -1,10 +1,15 @@
 ---
 
+- name: install client for Debian / Ubuntu
+  apt:
+    name: nut-client
+  when: ansible_distribution in ["Debian", "Ubuntu"]
+
 - name: set up /etc/nut/upsmon.conf
   blockinfile:
     path: /etc/nut/upsmon.conf
     block: |
-      MONITOR {{ nut_device.name }} 1 upsmon {{ nut_upsmon_password }} {{ nut_types[nut_mode] }}
+      MONITOR {{ nut_device.name }}@{{ nut_host }} 1 upsmon {{ nut_upsmon_password }} {{ nut_types[nut_mode] }}
 
 - name: start and enable nut-upsmon
   service:
@@ -13,3 +18,10 @@
     state: started
     enabled: true
   when: ansible_distribution == "Alpine"
+
+- name: start and enable nut-monitor
+  systemd:
+    name: nut-monitor
+    state: started
+    enabled: true
+  when: ansible_distribution in ["Debian", "Ubuntu"]
