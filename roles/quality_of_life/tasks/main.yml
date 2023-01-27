@@ -2,14 +2,15 @@
 - name: quality of life packages
   apk:
     name:
+      - curl
       - htop
+      - man-pages
+      - mandoc
       - mksh  # I want something somewhat nicer thant busybox ash
       - mosh
       - neovim
       - ripgrep
       - tmux
-      - mandoc
-      - man-pages
   when: ansible_distribution == "Alpine"
 
 - name: install python3
