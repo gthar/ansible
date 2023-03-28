@@ -9,10 +9,11 @@
       in {
         devShell = pkgs.mkShell {
           nativeBuildInputs = [
-            pkgs.bashInteractive
             pkgs.ansible
-            pkgs.ansible-lint
             pkgs.ansible-doctor
+            pkgs.ansible-lint
+            pkgs.bashInteractive
+            pkgs.just
           ];
           buildInputs = [ ];
         };
