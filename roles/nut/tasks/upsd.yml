@@ -6,12 +6,18 @@
       - nut-server
   when: ansible_distribution in ["Debian", "Ubuntu"]
 
+- name: "set MAXAGE to 25 in /etc/nut/upsd.conf"
+  lineinfile:
+    dest: /etc/nut/upsd.conf
+    regexp: '^#\s*MAXAGE.*$'
+    line: 'MAXAGE 25'
+
 - name: add UPS device(s) config to /etc/nut/ups.conf
   blockinfile:
     path: /etc/nut/ups.conf
     block: |
       [{{ nut_device.name }}]
-      {% for key, value in nut_device.config.items() %}  {{ key }} = "{{ value }}"
+      {% for key, value in nut_device.config.items() %}  {{ key }} = {{ value | to_json }}
       {% endfor %}
 
 - name: set up NUT user(s) to /etc/nut/upsd.users

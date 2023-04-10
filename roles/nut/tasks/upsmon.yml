@@ -11,6 +11,12 @@
     block: |
       MONITOR {{ nut_device.name }}@{{ nut_host }} 1 upsmon {{ nut_upsmon_password }} {{ nut_types[nut_mode] }}
 
+- name: "set DEADTIME to 25 in /etc/nut/upsmon.conf"
+  lineinfile:
+    dest: /etc/nut/upsmon.conf
+    regexp: 'DEADTIME.*$'
+    line: 'DEADTIME 25'
+
 - name: start and enable nut-upsmon with openrc
   service:
     name: nut-upsmon
