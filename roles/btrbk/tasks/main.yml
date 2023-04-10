@@ -37,6 +37,14 @@
     owner: btrbk
     mode: '0644'
 
+- name: add btrbk to cron
+  cron:
+    name: btrbk
+    special_time: daily
+    user: btrbk
+    job: "btrbk run"
+
+
 - name: add btrbk files to lbu
   lbu:
     include:
