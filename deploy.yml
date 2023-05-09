@@ -87,12 +87,14 @@
     - sshd
   vars:
     users:
-      - rilla
       - ansible
       - btrbk
       - builder
+      - dags
       - gopass
+      - rilla
       - woodpecker
+  tags: common
 
 - name: quality of life tools
   hosts:
@@ -163,6 +165,16 @@
   become: true
   roles:
     - wireguard
+  vars_files:
+    - 'vars/vault.yaml'
+
+- name: notifiers
+  hosts:
+    - suricata
+  become: true
+  roles:
+    - notifiers
+  tags: notifiers
 
 - name: set up NUT
   hosts:
