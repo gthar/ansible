@@ -1,0 +1,33 @@
+---
+
+- name: install notification programs
+  apk:
+    name:
+      - curl
+      - go-sendxmpp
+      - msmtp
+  when: ansible_distribution == "Alpine"
+
+- name: create config dir
+  file:
+    state: directory
+    path: /usr/local/etc/notifiers
+
+- name: render notifier configs
+  template:
+    src: "etc/notifiers/{{ item }}.j2"
+    dest: "/usr/local/etc/notifiers/{{ item }}"
+    owner: root
+    mode: '0600'
+  loop:
+    - gotify
+    - xmpp
+
+- name: copy notifier executables
+  copy:
+    src: "bin/{{ item }}"
+    dest: "/usr/local/bin/{{ item }}"
+    mode: '0755'
+  loop:
+    - notify-gotify
+    - notify-xmpp

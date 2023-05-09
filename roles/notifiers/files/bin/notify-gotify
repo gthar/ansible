@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# shellcheck disable=SC1091
+. /usr/local/etc/notifiers/gotify
+
+PRIORITY="${PRIORITY:-5}"
+
+if [ -n "$TITLE" ]; then
+    TITLE_ARG="--form title=${TITLE}"
+else
+    TITLE_ARG=""
+fi
+
+MSG="$*"
+
+# shellcheck disable=SC2086
+curl \
+    "${GOTIFY_URL}/message?token=${GOTIFY_TOKEN}" \
+    $TITLE_ARG \
+    --form "message=${MSG}" \
+    --form "priority=${PRIORITY}"

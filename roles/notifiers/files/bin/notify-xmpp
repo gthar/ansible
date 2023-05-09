@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# shellcheck disable=SC1091
+. /usr/local/etc/notifiers/xmpp
+
+MSG="$*"
+
+echo "$MSG" |
+    go-sendxmpp \
+        --username="$XMPP_ACCOUNT" \
+        --password="$XMPP_PASSWORD" \
+        "$XMPP_RECIPIENT"
