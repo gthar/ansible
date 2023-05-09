@@ -1,0 +1,41 @@
+---
+- name: create group 'dags'
+  group:
+    name: dags
+    gid: 506
+
+- name: create user 'dags'
+  user:
+    name: dags
+    uid: 506
+    group: dags
+    home: /var/lib/dags
+    password: "*"  # disabled password but can be accessed with SSH
+    groups:
+      - wheel
+    append: true
+
+- name: additional groups to dags
+  user:
+    name: dags
+    groups: "{{item}}"
+    append: true
+  when: item in ansible_facts.getent_group
+  with_items:
+    - docker
+
+- name: make sure dags owns its home
+  file:
+    state: directory
+    path: /var/lib/dags
+    owner: dags
+    group: dags
+    mode: '2755'
+
+- name: commit dags's home to lbu
+  lbu:
+    include:
+      - /var/lib/dags
+    exclude:
+      - /var/lib/dags/.ash_history
+  when: ansible_distribution == "Alpine" and alpine_mode in ["diskless", "data"]
