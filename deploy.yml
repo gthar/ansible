@@ -84,7 +84,7 @@
     - narwhal
     - snitch
     - suricata
-    # - pikvm
+    - pikvm
     - kitchen
   become: true
   roles:
