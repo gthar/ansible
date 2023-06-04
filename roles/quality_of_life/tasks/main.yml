@@ -10,6 +10,7 @@
       - mosh
       - neovim
       - ripgrep
+      - shadow
       - tmux
   when: ansible_distribution == "Alpine"
 
