@@ -40,6 +40,7 @@
 - name: mounts
   hosts:
     - suricata
+    - kitchen
   become: true
   roles:
     - mounts
@@ -62,6 +63,7 @@
 - name: lbu.conf
   hosts:
     - suricata
+    - kitchen
   become: true
   roles:
     - lbu_conf
@@ -70,6 +72,7 @@
 - name: setup_apkcache
   hosts:
     - suricata
+    - kitchen
   become: true
   roles:
     - apk_cache
@@ -82,6 +85,7 @@
     - snitch
     - suricata
     # - pikvm
+    - kitchen
   become: true
   roles:
     - users
@@ -103,6 +107,7 @@
     - fugu
     - narwhal
     - suricata
+    - kitchen
   become: true
   roles:
     - quality_of_life
