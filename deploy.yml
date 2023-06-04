@@ -23,6 +23,7 @@
     - snitch
     - suricata
     # - pikvm
+    - kitchen
   become: true
   roles:
     - repos
