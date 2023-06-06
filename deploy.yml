@@ -22,8 +22,9 @@
     - narwhal
     - snitch
     - suricata
-    # - pikvm
+    - pikvm
     - kitchen
+    - lb
   become: true
   roles:
     - repos
@@ -86,6 +87,7 @@
     - suricata
     - pikvm
     - kitchen
+    - lb
   become: true
   roles:
     - users
@@ -108,6 +110,7 @@
     - narwhal
     - suricata
     - kitchen
+    - lb
   become: true
   roles:
     - quality_of_life
