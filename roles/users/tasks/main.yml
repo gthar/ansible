@@ -6,7 +6,7 @@
 
 - name: create group 'media'
   group:
-    name: deploy
+    name: media
     gid: 701
 
 - name: determine available groups
