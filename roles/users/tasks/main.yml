@@ -4,6 +4,11 @@
     name: deploy
     gid: 700
 
+- name: create group 'media'
+  group:
+    name: deploy
+    gid: 701
+
 - name: determine available groups
   getent:
     database: group
