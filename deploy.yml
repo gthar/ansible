@@ -23,7 +23,7 @@
     - snitch
     - suricata
     - pikvm
-    - kitchen
+    - cuina
     - lb
   become: true
   roles:
@@ -41,7 +41,7 @@
 - name: mounts
   hosts:
     - suricata
-    - kitchen
+    - cuina
   become: true
   roles:
     - mounts
@@ -64,7 +64,7 @@
 - name: lbu.conf
   hosts:
     - suricata
-    - kitchen
+    - cuina
   become: true
   roles:
     - lbu_conf
@@ -73,7 +73,7 @@
 - name: setup_apkcache
   hosts:
     - suricata
-    - kitchen
+    - cuina
   become: true
   roles:
     - apk_cache
@@ -86,7 +86,7 @@
     - snitch
     - suricata
     - pikvm
-    - kitchen
+    - cuina
     - lb
   become: true
   roles:
@@ -109,7 +109,7 @@
     - fugu
     - narwhal
     - suricata
-    - kitchen
+    - cuina
     - lb
   become: true
   roles:
