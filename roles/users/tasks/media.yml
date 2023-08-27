@@ -1,0 +1,32 @@
+---
+- name: create group 'media'
+  group:
+    name: media
+    gid: 508
+
+- name: create user 'media'
+  user:
+    name: media
+    uid: 508
+    group: media
+    home: /var/lib/media
+    password: "!"
+  groups:
+    - audio
+    - video
+
+- name: make sure media owns its home
+  file:
+    state: directory
+    path: /var/lib/media
+    owner: media
+    group: media
+    mode: '2755'
+
+- name: commit media's home to lbu
+  lbu:
+    include:
+      - /var/lib/media
+    exclude:
+      - /var/lib/media/.ash_history
+  when: ansible_distribution == "Alpine" and alpine_mode in ["diskless", "data"]

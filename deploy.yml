@@ -97,6 +97,7 @@
       - ansible
       - btrbk
       - builder
+      - media
       - dags
       - gopass
       - rilla
